@@ -12,3 +12,4 @@ Run a PACS meeting and present neat tricks
 * `Search s -Learnt` for a search of local hypotheses excluding Learnt
 * `unfold "+"` works
 * `destruct matches` tactic
+* maximally inserted implicits apply when no arguments (canonical example: is `nil` `@nil` or `@nil _`?)
