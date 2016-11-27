@@ -1,4 +1,6 @@
-Run a PACS meeting and present neat tricks
+# Tricks in Coq
+
+Some tips, tricks, and features in Coq that are hard to discover.
 
 * `pattern` tactic
 * `lazymatch` for better error messages
