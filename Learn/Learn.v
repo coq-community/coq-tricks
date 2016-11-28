@@ -1,3 +1,6 @@
+(* Forward chaining of applications, to facilitate "saturating" the known facts
+without specializing. See Clément's thesis
+http://pit-claudel.fr/clement/MSc/#org036d20e for a nicer explanation. *)
 Inductive Learnt {P:Prop} :=
   | AlreadyLearnt (H:P).
 
