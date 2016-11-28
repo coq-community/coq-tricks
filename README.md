@@ -14,4 +14,5 @@ Some tips, tricks, and features in Coq that are hard to discover.
 * `Search s -Learnt` for a search of local hypotheses excluding Learnt
 * `unfold "+"` works
 * `destruct matches` tactic
-* maximally inserted implicits apply when no arguments (canonical example: is `nil` `@nil` or `@nil _`?)
+* maximally inserted implicit arguments are implicit even when for identifier alone (eg, `nil` is defined to include the implicit list element type)
+* maximally inserted arguments can be defined differently for different numbers of arguments - undocumented but [`eq_refl` provides an example](https://github.com/coq/coq/blob/trunk/theories/Init/Logic.v#L290-L291)
