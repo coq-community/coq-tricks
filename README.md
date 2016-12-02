@@ -16,3 +16,4 @@ Some tips, tricks, and features in Coq that are hard to discover.
 * `destruct matches` tactic
 * maximally inserted implicit arguments are implicit even when for identifier alone (eg, `nil` is defined to include the implicit list element type)
 * maximally inserted arguments can be defined differently for different numbers of arguments - undocumented but [`eq_refl` provides an example](https://github.com/coq/coq/blob/trunk/theories/Init/Logic.v#L290-L291)
+* using instantiate to modify evar environment (thanks to Jonathan Leivent on coq-club)
