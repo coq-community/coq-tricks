@@ -16,3 +16,7 @@ Search (existT ?P ?x _ = existT ?P ?x _).
 Search list outside List.
 
 Search plus inside List.
+
+(* searches use the name of the theorem of the string does not resolve to a
+notation *)
+Search "dec" "<".
