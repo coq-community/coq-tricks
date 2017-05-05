@@ -2,6 +2,8 @@
 
 (subject Re: [Coq-Club] Unification Bug?")
 
+https://sympa.inria.fr/sympa/arc/coq-club/2016-12/msg00007.html
+
  *)
 Definition foo A B : (A -> B) = (A -> B) := eq_refl.
 
