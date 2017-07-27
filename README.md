@@ -2,6 +2,8 @@
 
 Some tips, tricks, and features in Coq that are hard to discover.
 
+If you have a trick you've found useful feel free to submit an issue or pull request!
+
 * `pattern` tactic
 * `lazymatch` for better error messages
 * `Search` vernacular variants
