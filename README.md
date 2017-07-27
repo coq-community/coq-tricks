@@ -18,5 +18,5 @@ Some tips, tricks, and features in Coq that are hard to discover.
 * maximally inserted arguments can be defined differently for different numbers of arguments - undocumented but [`eq_refl` provides an example](https://github.com/coq/coq/blob/trunk/theories/Init/Logic.v#L310)
 * using instantiate to modify evar environment (thanks to Jonathan Leivent on coq-club)
 * strong induction is in the standard library: `Require Import Arith Wf` and use `induction n using (well_founded_induction lt_wf)`.
-* `dependent destruction` and `dependent induction` require `Require Import Coq.Program.Equality.` (included in an [example on the manual](https://coq.inria.fr/refman/Reference-Manual012.html#dependent-induction-example)); the error message without this import does not mention them.
+* `dependent destruction` and `dependent induction` require `Require Import Coq.Program.Equality.` (included in an [example on the manual](https://coq.inria.fr/refman/Reference-Manual012.html#dependent-induction-example)); the error message without this import does not mention them (error message will be improved in v8.7 release).
 * `r.(Field)` syntax: same as `Field r`, but convenient when `Field` is a projection function for the (record) type of `r`.
