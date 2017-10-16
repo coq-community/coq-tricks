@@ -21,6 +21,7 @@ If you have a trick you've found useful feel free to submit an issue or pull req
 * using `instantiate` to modify evar environment (thanks to Jonathan Leivent on coq-club)
 * `eexists ?[x]` lets one name an existential variable to be able to refer to it later
 * strong induction is in the standard library: `Require Import Arith.` and use `induction n as [n IHn] using lt_wf_ind.`
+* induction on the length of a list: `Require Import Coq.Arith.Wf_nat.` and `induction xs as [xs IHxs] using (induction_ltof1 _ (@length _)); unfold ltof in IHxs.`
 * `dependent destruction` and `dependent induction` require `Require Import Coq.Program.Equality.` (included in an [example on the manual](https://coq.inria.fr/refman/Reference-Manual012.html#dependent-induction-example)); the error message without this import does not mention them (error message will be improved in v8.7 release).
 * `r.(Field)` syntax: same as `Field r`, but convenient when `Field` is a projection function for the (record) type of `r`.
 * `debug auto`, `debug eauto`, and `debug trivial` give traces, including failed invocations. `info_auto`, `info_eauto`, and `info_trivial` are less verbose ways to debug which only report what the resulting proof includes (currently [info\_trivial is broken](https://coq.inria.fr/bugs/show_bug.cgi?id=5741))
