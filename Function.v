@@ -34,7 +34,6 @@ Proof.
   + apply lt_wf.
 Defined.
 
-(** they are totally same. *)
 Goal
   attempt_2 8 0 = 4.
 Proof.
