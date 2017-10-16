@@ -24,3 +24,8 @@ If you have a trick you've found useful feel free to submit an issue or pull req
 * `dependent destruction` and `dependent induction` require `Require Import Coq.Program.Equality.` (included in an [example on the manual](https://coq.inria.fr/refman/Reference-Manual012.html#dependent-induction-example)); the error message without this import does not mention them (error message will be improved in v8.7 release).
 * `r.(Field)` syntax: same as `Field r`, but convenient when `Field` is a projection function for the (record) type of `r`.
 * `debug auto`, `debug eauto`, and `debug trivial` give traces, including failed invocations. `info_auto`, `info_eauto`, and `info_trivial` are less verbose ways to debug which only report what the resulting proof includes (currently [info\_trivial is broken](https://coq.inria.fr/bugs/show_bug.cgi?id=5741))
+* `Function` vernacular provides a more advanced way to define recursive functions, which removes the restriction of having a structurally decreasing argument; you just need to specify a well-founded relation or a decreasing measure maps to a nat, then prove all necessary obligations to show this function can terminate. See [manual](https://coq.inria.fr/refman/Reference-Manual004.html#sec78) and examples in `Function.v` for more details.
+
+  Two alternatives are considerable as drop-in replacements for `Function`.
+  * `Program Fixpoint` may be useful when defining a nested recursive function. See [manual](https://coq.inria.fr/refman/Reference-Manual027.html#sec754) and [this StackOverflow post](https://stackoverflow.com/questions/10292421/error-in-defining-ackermann-in-coq).
+  * [CPDT's way](http://adam.chlipala.net/cpdt/html/Cpdt.GeneralRec.html) of defining general recursive functions with `Fix` combinator.
