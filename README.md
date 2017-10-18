@@ -30,3 +30,4 @@ If you have a trick you've found useful feel free to submit an issue or pull req
   Two alternatives are considerable as drop-in replacements for `Function`.
   * `Program Fixpoint` may be useful when defining a nested recursive function. See [manual](https://coq.inria.fr/refman/Reference-Manual027.html#sec754) and [this StackOverflow post](https://stackoverflow.com/questions/10292421/error-in-defining-ackermann-in-coq).
   * [CPDT's way](http://adam.chlipala.net/cpdt/html/Cpdt.GeneralRec.html) of defining general recursive functions with `Fix` combinator.
+* One can pattern-match on tuples under lambdas: `Definition fst {A B} : (A * B) -> A := fun '(x,_) => x.` (works since Coq 8.6).
