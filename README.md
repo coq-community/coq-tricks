@@ -32,3 +32,7 @@ If you have a trick you've found useful feel free to submit an issue or pull req
   * [CPDT's way](http://adam.chlipala.net/cpdt/html/Cpdt.GeneralRec.html) of defining general recursive functions with `Fix` combinator.
 * One can pattern-match on tuples under lambdas: `Definition fst {A B} : (A * B) -> A := fun '(x,_) => x.` (works since Coq 8.6).
 * `constructor` and `econstructor` backtrack over the constructors over an inductive, which lets you do fun things exploring the constructors of an inductive type. See [Constructors.v](Constructors.v) for some demonstrations.
+* There's a way to destruct and maintain an equality: `destruct_with_eqn x`.
+  You can also do `destruct x eqn:H` to explicitly name the equality
+  hypothesis. This is similar to `case_eq x; intros`; I'm not sure what the
+  practical differences are.
