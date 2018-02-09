@@ -23,7 +23,6 @@ Defined.
 Compute attempt_2 1024 0.
 
 (** function with well-founded relation. *)
-Print lt.
 Function attempt_3 (n r : nat) {wf lt n} : nat :=
   match n with
   | 0 => r
@@ -43,5 +42,14 @@ Proof.
   rewrite attempt_2_equation; simpl.
   rewrite attempt_2_equation; simpl.
   rewrite attempt_2_equation; simpl.
+  reflexivity.
+Qed.
+
+(* note that the two above definitions are really just alternate ways of doing
+the same thing ([measure] is just a convenience for leveraging the
+well-foundedness of [nat]'s [lt]) *)
+Theorem attempts_2_and_3_are_the_same :
+  attempt_2 = attempt_3.
+Proof.
   reflexivity.
 Qed.
