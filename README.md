@@ -17,7 +17,7 @@ If you have a trick you've found useful feel free to submit an issue or pull req
 * `unfold "+"` works
 * `destruct matches` tactic
 * maximally inserted implicit arguments are implicit even when for identifier alone (eg, `nil` is defined to include the implicit list element type)
-* maximally inserted arguments can be defined differently for different numbers of arguments - undocumented but [`eq_refl` provides an example](https://github.com/coq/coq/blob/trunk/theories/Init/Logic.v#L310)
+* maximally inserted arguments can be defined differently for different numbers of arguments - undocumented but [`eq_refl` provides an example](https://github.com/coq/coq/blob/trunk/theories/Init/Logic.v#L297-298)
 * using `instantiate` to modify evar environment (thanks to Jonathan Leivent on coq-club)
 * `eexists ?[x]` lets one name an existential variable to be able to refer to it later
 * strong induction is in the standard library: `Require Import Arith.` and use `induction n as [n IHn] using lt_wf_ind.`
