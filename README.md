@@ -36,3 +36,6 @@ If you have a trick you've found useful feel free to submit an issue or pull req
   You can also do `destruct x eqn:H` to explicitly name the equality
   hypothesis. This is similar to `case_eq x; intros`; I'm not sure what the
   practical differences are.
+* `rew H in t` notation to use `eq_rect` for a (safe) "type cast". Need to
+  import `EqNotations` - see [RewNotation.v](RewNotation.v) for a working
+  example.
