@@ -42,3 +42,4 @@ If you have a trick you've found useful feel free to submit an issue or pull req
 ## Querying Coq
 * `Search` vernacular variants
 * `Search s -Learnt` for a search of local hypotheses excluding Learnt
+* `Locate` can search for notation, including partial searches.
