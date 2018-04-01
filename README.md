@@ -28,12 +28,12 @@ If you have a trick you've found useful feel free to submit an issue or pull req
   example.
 
 ## Gallina
-* tactics in terms
-  * `ltac:(eauto)` for argument to proof
+* tactics in terms, eg `ltac:(eauto)` can provide a proof argument
 * maximally inserted implicit arguments are implicit even when for identifier alone (eg, `nil` is defined to include the implicit list element type)
 * maximally inserted arguments can be defined differently for different numbers of arguments - undocumented but [`eq_refl` provides an example](https://github.com/coq/coq/blob/trunk/theories/Init/Logic.v#L297-298)
 * `r.(Field)` syntax: same as `Field r`, but convenient when `Field` is a projection function for the (record) type of `r`.
 * `Function` vernacular provides a more advanced way to define recursive functions, which removes the restriction of having a structurally decreasing argument; you just need to specify a well-founded relation or a decreasing measure maps to a nat, then prove all necessary obligations to show this function can terminate. See [manual](https://coq.inria.fr/refman/Reference-Manual004.html#sec78) and examples in `Function.v` for more details.
+
   Two alternatives are considerable as drop-in replacements for `Function`.
   * `Program Fixpoint` may be useful when defining a nested recursive function. See [manual](https://coq.inria.fr/refman/program.html#hevea_command290) and [this StackOverflow post](https://stackoverflow.com/questions/10292421/error-in-defining-ackermann-in-coq).
   * [CPDT's way](http://adam.chlipala.net/cpdt/html/Cpdt.GeneralRec.html) of defining general recursive functions with `Fix` combinator.
