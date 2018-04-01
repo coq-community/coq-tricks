@@ -40,6 +40,6 @@ If you have a trick you've found useful feel free to submit an issue or pull req
 * One can pattern-match on tuples under lambdas: `Definition fst {A B} : (A * B) -> A := fun '(x,_) => x.` (works since Coq 8.6).
 
 ## Querying Coq
-* `Search` vernacular variants
+* `Search` vernacular variants; see [Search.v](Search.v) for examples.
 * `Search s -Learnt` for a search of local hypotheses excluding Learnt
 * `Locate` can search for notation, including partial searches.
