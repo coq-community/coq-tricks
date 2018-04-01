@@ -27,6 +27,7 @@ If you have a trick you've found useful feel free to submit an issue or pull req
   import `EqNotations` - see [RewNotation.v](RewNotation.v) for a working
   example.
 * `intro`-patterns can be combined in a non-trivial way: `intros [=->%lemma]` -- see [IntroPatterns.v](IntroPatterns.v).
+* `change` tactic supports patterns (`?var`): e.g. `repeat change (fun x => ?f x) with f` would eta-reduce all the functions (of arbitrary arity) in the goal.
 
 ## Gallina
 * tactics in terms, eg `ltac:(eauto)` can provide a proof argument
