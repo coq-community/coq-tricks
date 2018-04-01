@@ -26,6 +26,7 @@ If you have a trick you've found useful feel free to submit an issue or pull req
 * `rew H in t` notation to use `eq_rect` for a (safe) "type cast". Need to
   import `EqNotations` - see [RewNotation.v](RewNotation.v) for a working
   example.
+* `intro`-patterns can be combined in a non-trivial way: `intros [=->%lemma]` -- see [IntroPatterns.v](IntroPatterns.v).
 
 ## Gallina
 * tactics in terms, eg `ltac:(eauto)` can provide a proof argument
