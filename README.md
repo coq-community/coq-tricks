@@ -41,7 +41,9 @@ If you have a trick you've found useful feel free to submit an issue or pull req
   * [CPDT's way](http://adam.chlipala.net/cpdt/html/Cpdt.GeneralRec.html) of defining general recursive functions with `Fix` combinator.
 * One can pattern-match on tuples under lambdas: `Definition fst {A B} : (A * B) -> A := fun '(x,_) => x.` (works since Coq 8.6).
 
-## Querying Coq
+## Other Coq commands
 * `Search` vernacular variants; see [Search.v](Search.v) for examples.
 * `Search s -Learnt` for a search of local hypotheses excluding Learnt
 * `Locate` can search for notation, including partial searches.
+* `Optimize Heap` (undocumented) runs GC (specifically [`Gc.compact`](https://caml.inria.fr/pub/docs/manual-ocaml/libref/Gc.html))
+* `Optimize Proof` (undocumented) runs several simplifications on the current proof term (see [`Proofview.compact`](https://github.com/coq/coq/blob/9a4ca53a3a021cb16de7706ec79a26e49f54de49/engine/proofview.ml#L40))
