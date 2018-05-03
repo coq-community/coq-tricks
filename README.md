@@ -28,6 +28,7 @@ If you have a trick you've found useful feel free to submit an issue or pull req
   example.
 * `intro`-patterns can be combined in a non-trivial way: `intros [=->%lemma]` -- see [IntroPatterns.v](IntroPatterns.v).
 * `change` tactic supports patterns (`?var`): e.g. `repeat change (fun x => ?f x) with f` would eta-reduce all the functions (of arbitrary arity) in the goal.
+* One way to implement a tactic that sleeps for n seconds is in [Sleep.v](Sleep.v).
 
 ## Gallina
 * tactics in terms, eg `ltac:(eauto)` can provide a proof argument
