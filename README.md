@@ -41,6 +41,10 @@ If you have a trick you've found useful feel free to submit an issue or pull req
   * `Program Fixpoint` may be useful when defining a nested recursive function. See [manual](https://coq.inria.fr/refman/program.html#hevea_command290) and [this StackOverflow post](https://stackoverflow.com/questions/10292421/error-in-defining-ackermann-in-coq).
   * [CPDT's way](http://adam.chlipala.net/cpdt/html/Cpdt.GeneralRec.html) of defining general recursive functions with `Fix` combinator.
 * One can pattern-match on tuples under lambdas: `Definition fst {A B} : (A * B) -> A := fun '(x,_) => x.` (works since Coq 8.6).
+* Records fields can be defined with `:>`, which make that field accessor a coercion. There are three ways to use this (since there are three types of coercion classes). See [Coercions.v](Coercions.v) for some concrete examples.
+  - if the field is an ordinary type, the record can be used as that type (the field will implicitly be accessed)
+  - if the field has a function type, the record can be called
+  - if the field is a sort (eg, `Type`), then the record can be used as a type
 
 ## Other Coq commands
 * `Search` vernacular variants; see [Search.v](Search.v) for examples.
