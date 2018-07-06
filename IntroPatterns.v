@@ -12,4 +12,9 @@ Section IntroPatterns.
       [length ys = 0] into [ys = nil] and move it into the context as [H]
       But [->] lets us rewrite the equation right away *)
 
+  Theorem conditional_2 (P Q : Prop) : (P -> Q) -> ~(P /\ ~Q).
+  Proof. intros p_to_q [q%p_to_q []]; exact q. Qed.
+  (** Notes: %p_to_q weakens P to Q on the fly and
+             [] applies the hypothesis of type (~ Q) to the goal *)
+
 End IntroPatterns.
