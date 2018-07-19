@@ -37,6 +37,13 @@ If you have a trick you've found useful feel free to submit an issue or pull req
   - `in |- *` (just the goal, same as leaving the whole thing off)
   - `in * |- *` (everywhere, same as `in *`)
   Why have all these forms, particularly the last two? They're useless, but if Coq ever supported first-class occurrence sets (that is, you could write tactics that takes occurrence sets and operate on them) they might be handy. Except `in |-`, which is probably useless and just an artifact of the grammar.
+* You can use notations to shorten repetitive Ltac patterns (much like Haskell's [PatternSynonyms](https://ghc.haskell.org/trac/ghc/wiki/PatternSynonyms#Motivatingexample)). Define a notation with holes (underscores) and use it in an Ltac match, eg `Notation anyplus := (_ + _).` and then
+    ```
+    match goal with
+    | |- context[anyplus] => idtac
+    end
+    ```
+  I would recommend using `Local Notation` so the notation isn't available outside the current file.
 
 ## Gallina
 * tactics in terms, eg `ltac:(eauto)` can provide a proof argument
