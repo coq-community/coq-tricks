@@ -1,6 +1,6 @@
 (* example thanks to Jonathan Leivent, Dec 2, 2016 email to coq-club
 
-(subject Re: [Coq-Club] Unification Bug?")
+(subject Re: [Coq-Club] Unification Bug?)
 
 https://sympa.inria.fr/sympa/arc/coq-club/2016-12/msg00007.html
 
