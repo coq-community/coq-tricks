@@ -61,6 +61,7 @@ If you have a trick you've found useful feel free to submit an issue or pull req
   - if the field has a function type, the record can be called
   - if the field is a sort (eg, `Type`), then the record can be used as a type
 * The type classes in RelationClasses are useful but can be repetitive to prove. [RelationInstances.v](RelationInstances.v) goes through a few ways of making these more convenient, and why you would want to do so (basically you can make `reflexivity`, `transitivity`, and `symmetry` more powerful).
+* The types of inductives can be definitions, as long as they expand to an "arity" (a function type ending in `Prop`, `Set`, or `Type`). See [ArityDefinition.v](ArityDefinition.v).
 
 ## Other Coq commands
 * `Search` vernacular variants; see [Search.v](Search.v) for examples.
