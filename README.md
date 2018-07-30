@@ -49,7 +49,7 @@ If you have a trick you've found useful feel free to submit an issue or pull req
 * tactics in terms, eg `ltac:(eauto)` can provide a proof argument
 * maximally inserted implicit arguments are implicit even when for identifier alone (eg, `nil` is defined to include the implicit list element type)
 * maximally inserted arguments can be defined differently for different numbers of arguments - undocumented but [`eq_refl` provides an example](https://github.com/coq/coq/blob/trunk/theories/Init/Logic.v#L297-298)
-* `r.(Field)` syntax: same as `Field r`, but convenient when `Field` is a projection function for the (record) type of `r`.
+* `r.(Field)` syntax: same as `Field r`, but convenient when `Field` is a projection function for the (record) type of `r`. If you use these, you might also want `Set Printing Projections` so Coq re-prints calls to projections with the same syntax.
 * `Function` vernacular provides a more advanced way to define recursive functions, which removes the restriction of having a structurally decreasing argument; you just need to specify a well-founded relation or a decreasing measure maps to a nat, then prove all necessary obligations to show this function can terminate. See [manual](https://coq.inria.fr/refman/Reference-Manual004.html#sec78) and examples in `Function.v` for more details.
 
   Two alternatives are considerable as drop-in replacements for `Function`.
