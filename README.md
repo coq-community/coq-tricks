@@ -44,6 +44,7 @@ If you have a trick you've found useful feel free to submit an issue or pull req
     end
     ```
   I would recommend using `Local Notation` so the notation isn't available outside the current file.
+* You can make all constructors of an inductive hints with `Hint Constructors`; you can also do this locally in a proof with `eauto using t` where `t` is the name of the inductive.
 
 ## Gallina
 * tactics in terms, eg `ltac:(eauto)` can provide a proof argument
