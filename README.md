@@ -45,6 +45,7 @@ If you have a trick you've found useful feel free to submit an issue or pull req
     ```
   I would recommend using `Local Notation` so the notation isn't available outside the current file.
 * You can make all constructors of an inductive hints with `Hint Constructors`; you can also do this locally in a proof with `eauto using t` where `t` is the name of the inductive.
+* The `intuition` tactic has some unexpected behaviors. It takes a tactic to run on each goal, which is `auto with *` by default, using hints from _all hint databases_. `intuition idtac` or `intuition eauto` are both much safer. When using these, note that `intuition eauto; simpl` is parsed as `intuition (eauto; simpl)`, which is unlikely to be what you want; you'll need to instead write `(intuition eauto); simpl`.
 
 ## Gallina
 * tactics in terms, eg `ltac:(eauto)` can provide a proof argument
