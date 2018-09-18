@@ -59,9 +59,10 @@ If you have a trick you've found useful feel free to submit an issue or pull req
   * [CPDT's way](http://adam.chlipala.net/cpdt/html/Cpdt.GeneralRec.html) of defining general recursive functions with `Fix` combinator.
 * One can pattern-match on tuples under lambdas: `Definition fst {A B} : (A * B) -> A := fun '(x,_) => x.` (works since Coq 8.6).
 * Records fields can be defined with `:>`, which make that field accessor a coercion. There are three ways to use this (since there are three types of coercion classes). See [Coercions.v](Coercions.v) for some concrete examples.
-  - if the field is an ordinary type, the record can be used as that type (the field will implicitly be accessed)
-  - if the field has a function type, the record can be called
-  - if the field is a sort (eg, `Type`), then the record can be used as a type
+  - If the field is an ordinary type, the record can be used as that type (the field will implicitly be accessed). One good use case for this is whenever a record includes another record; this coercion will make the field accessors of the sub-record work for the outer record as well. (This is vaguely similar to [Go embedded structs](https://golang.org/doc/effective_go.html#embedding))
+  - If the field has a function type, the record can be called.
+  - If the field is a sort (eg, `Type`), then the record can be used as a type.
+* When a Class field (as opposed to a record) is defined with `:>`, it becomes a hint for typeclass resolution. This is useful when a class includes a "super-class" requirement as a field. For example, `Equivalence` has fields for reflexivity, symmetry, and transitivity. The reflexivity field can be used to generically take an `Equivalence` instance and get a reflexivity instance for free.
 * The type classes in RelationClasses are useful but can be repetitive to prove. [RelationInstances.v](RelationInstances.v) goes through a few ways of making these more convenient, and why you would want to do so (basically you can make `reflexivity`, `transitivity`, and `symmetry` more powerful).
 * The types of inductives can be definitions, as long as they expand to an "arity" (a function type ending in `Prop`, `Set`, or `Type`). See [ArityDefinition.v](ArityDefinition.v).
 
