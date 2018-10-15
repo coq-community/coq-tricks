@@ -46,6 +46,7 @@ If you have a trick you've found useful feel free to submit an issue or pull req
   I would recommend using `Local Notation` so the notation isn't available outside the current file.
 * You can make all constructors of an inductive hints with `Hint Constructors`; you can also do this locally in a proof with `eauto using t` where `t` is the name of the inductive.
 * The `intuition` tactic has some unexpected behaviors. It takes a tactic to run on each goal, which is `auto with *` by default, using hints from _all hint databases_. `intuition idtac` or `intuition eauto` are both much safer. When using these, note that `intuition eauto; simpl` is parsed as `intuition (eauto; simpl)`, which is unlikely to be what you want; you'll need to instead write `(intuition eauto); simpl`.
+* The `Coq.Program.Tactics` library has a number of useful tactics and tactic helpers. Some gems that I like: `add_hypothesis` is like `pose proof` but fails if the fact is already in the context (a lightweight version of the `learn` approach); `destruct_one_ex` implements the tricky code to eliminate an `exists` while retaining names (it's a better version of our `deex`); `on_application` matches any application of `f` by simply handling a large number of arities.
 
 ## Gallina
 * tactics in terms, eg `ltac:(eauto)` can provide a proof argument
