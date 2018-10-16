@@ -79,4 +79,6 @@ If you have a trick you've found useful feel free to submit an issue or pull req
 * Definitions can be normalized (simplified/computed) easily with `Definition bar := Eval compute in foo.`
 
 ## Using Coq
-* You can pass `-noinit` to `coqc` or `coqtop` to avoid loading the standard library. Ltac is provided as a plugin loaded by the standard library; to load it you need `Declare ML Module "ltac_plugin".` (see [NoInit.v](NoInit.v)).
+* You can pass `-noinit` to `coqc` or `coqtop` to avoid loading the standard library.
+  * Ltac is provided as a plugin loaded by the standard library; to load it you need `Declare ML Module "ltac_plugin".` (see [NoInit.v](NoInit.v)).
+  * Numeral notations are only provided by the prelude, even if you issue `Require Import Coq.Init.Datatypes`.

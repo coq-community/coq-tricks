@@ -5,3 +5,7 @@ manually. *)
 
 Declare ML Module "ltac_plugin".
 Ltac foo := idtac.
+
+(* Local Variables: *)
+(* coq-prog-args: ("-emacs" "-noinit") *)
+(* End: *)
