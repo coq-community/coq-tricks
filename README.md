@@ -76,6 +76,7 @@ If you have a trick you've found useful feel free to submit an issue or pull req
 * `Generalizable Variable A` enables implicit generalization; `Definition id `(x:A) := x` will implicitly add a parameter `A` before `x`. `Generalizable All Variables` enables implicit generalization for any identifier. Note that this surprisingly allows generalization without a backtick in Instances; see [InstanceGeneralization.v](InstanceGeneralization.v). [Issue #6030](https://github.com/coq/coq/issues/6030) generously requests this behavior be documented, but it should probably require enabling some option.
 * `Check` supports partial terms, printing a type along with a context of evars. A cool example is `Check (id _ _)`, where the first underscore must be a function (along with other constraints on the types involved).
 * `Unset Intuition Negation Unfolding` will cause  `intuition` to stop unfolding `not`.
+* Definitions can be normalized (simplified/computed) easily with `Definition bar := Eval compute in foo.`
 
 ## Using Coq
 * You can pass `-noinit` to `coqc` or `coqtop` to avoid loading the standard library. Ltac is provided as a plugin loaded by the standard library; to load it you need `Declare ML Module "ltac_plugin".` (see [NoInit.v](NoInit.v)).
