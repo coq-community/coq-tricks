@@ -78,6 +78,7 @@ If you have a trick you've found useful feel free to submit an issue or pull req
 * `Check` supports partial terms, printing a type along with a context of evars. A cool example is `Check (id _ _)`, where the first underscore must be a function (along with other constraints on the types involved).
 * `Unset Intuition Negation Unfolding` will cause  `intuition` to stop unfolding `not`.
 * Definitions can be normalized (simplified/computed) easily with `Definition bar := Eval compute in foo.`
+* `Set Uniform Inductive Parameters` (in Coq v8.9+beta onwards) allows you to omit the uniform parameters to an inductive in the constructors.
 
 ## Using Coq
 * You can pass `-noinit` to `coqc` or `coqtop` to avoid loading the standard library.
