@@ -67,6 +67,7 @@ If you have a trick you've found useful feel free to submit an issue or pull req
 * When a Class field (as opposed to a record) is defined with `:>`, it becomes a hint for typeclass resolution. This is useful when a class includes a "super-class" requirement as a field. For example, `Equivalence` has fields for reflexivity, symmetry, and transitivity. The reflexivity field can be used to generically take an `Equivalence` instance and get a reflexivity instance for free.
 * The type classes in RelationClasses are useful but can be repetitive to prove. [RelationInstances.v](RelationInstances.v) goes through a few ways of making these more convenient, and why you would want to do so (basically you can make `reflexivity`, `transitivity`, and `symmetry` more powerful).
 * The types of inductives can be definitions, as long as they expand to an "arity" (a function type ending in `Prop`, `Set`, or `Type`). See [ArityDefinition.v](ArityDefinition.v).
+* Record fields that are functions can be written in definition-style syntax with the parameters bound after the record name, eg `{| func x y := x + y; |}` (see [RecordFunction.v] for a complete example).
 
 ## Other Coq commands
 * `Search` vernacular variants; see [Search.v](Search.v) for examples.
