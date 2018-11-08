@@ -68,6 +68,7 @@ If you have a trick you've found useful feel free to submit an issue or pull req
 * The type classes in RelationClasses are useful but can be repetitive to prove. [RelationInstances.v](RelationInstances.v) goes through a few ways of making these more convenient, and why you would want to do so (basically you can make `reflexivity`, `transitivity`, and `symmetry` more powerful).
 * The types of inductives can be definitions, as long as they expand to an "arity" (a function type ending in `Prop`, `Set`, or `Type`). See [ArityDefinition.v](ArityDefinition.v).
 * Record fields that are functions can be written in definition-style syntax with the parameters bound after the record name, eg `{| func x y := x + y; |}` (see [RecordFunction.v] for a complete example).
+* If you have a coercion `get_function : MyRecord >-> Funclass` you can use `Add Printing Coercion get_function` and then add a notation for `get_function` so your coercion can be parsed as function application but printed using some other syntax (and maybe you want that syntax to be `printing only`).
 
 ## Other Coq commands
 * `Search` vernacular variants; see [Search.v](Search.v) for examples.
