@@ -50,6 +50,8 @@ If you have a trick you've found useful feel free to submit an issue or pull req
 * The `intuition` tactic has some unexpected behaviors. It takes a tactic to run on each goal, which is `auto with *` by default, using hints from _all hint databases_. `intuition idtac` or `intuition eauto` are both much safer. When using these, note that `intuition eauto; simpl` is parsed as `intuition (eauto; simpl)`, which is unlikely to be what you want; you'll need to instead write `(intuition eauto); simpl`.
 * The `Coq.Program.Tactics` library has a number of useful tactics and tactic helpers. Some gems that I like: `add_hypothesis` is like `pose proof` but fails if the fact is already in the context (a lightweight version of the `learn` approach); `destruct_one_ex` implements the tricky code to eliminate an `exists` while retaining names (it's a better version of our `deex`); `on_application` matches any application of `f` by simply handling a large number of arities.
 * You can structure your proofs using bullets. You [should use them in the order](https://coq.inria.fr/refman/proof-engine/proof-handling.html#bullets) `-`, `+`, `*` so that Proof General indents them correctly. If you need more bullets you can keep going with `--`, `++`, `**` (although you should rarely need more then three levels of bullets in one proof).
+* You can use the `set` tactic to create shorthand names for expressions. These are special `let`-bound variables and show up in the hypotheses as `v := def`. To "unfold" these definitions you can do `subst v` (note the explicit name is required, `subst` will not do this by default). This is a good way to make large goals readable, perhaps while figuring out what lemma to extract. It can also be useful if you need to refer these expressions.
+* When you write a function in proof mode (useful when dependent types are involved), you probably want to end the proof with `Defined` instead of `Qed`. The difference is that `Qed` makes the proof term opaque and prevents reduction, while `Defined` will simplify correctly. If you mix computational parts and proof parts (eg, functions which produce sigma types) then you may want to separate the proof into a lemma so that it doesn't get unfolded into a large proof term.
 
 ## Gallina
 * tactics in terms, eg `ltac:(eauto)` can provide a proof argument
@@ -71,6 +73,7 @@ If you have a trick you've found useful feel free to submit an issue or pull req
 * The types of inductives can be definitions, as long as they expand to an "arity" (a function type ending in `Prop`, `Set`, or `Type`). See [ArityDefinition.v](ArityDefinition.v).
 * Record fields that are functions can be written in definition-style syntax with the parameters bound after the record name, eg `{| func x y := x + y; |}` (see [RecordFunction.v](RecordFunction.v) for a complete example).
 * If you have a coercion `get_function : MyRecord >-> Funclass` you can use `Add Printing Coercion get_function` and then add a notation for `get_function` so your coercion can be parsed as function application but printed using some other syntax (and maybe you want that syntax to be `printing only`).
+* You can pass implicit arguments explicitly in a keyword-argument-like style, eg `nil (A:=nat)`. Use `About` to figure out argument names.
 
 ## Other Coq commands
 * `Search` vernacular variants; see [Search.v](Search.v) for examples.
@@ -83,6 +86,7 @@ If you have a trick you've found useful feel free to submit an issue or pull req
 * `Unset Intuition Negation Unfolding` will cause  `intuition` to stop unfolding `not`.
 * Definitions can be normalized (simplified/computed) easily with `Definition bar := Eval compute in foo.`
 * `Set Uniform Inductive Parameters` (in Coq v8.9+beta onwards) allows you to omit the uniform parameters to an inductive in the constructors.
+* `Lemma` and `Theorem` are synonymous, except that `coqdoc` will not show lemmas. Also synonymous: `Corollary`, `Remark`, and `Fact`. `Definition` is nearly synonymous, except that `Theorem x := def` is not supported (you need to use `Definition`).
 
 ## Using Coq
 * You can pass `-noinit` to `coqc` or `coqtop` to avoid loading the standard library.
