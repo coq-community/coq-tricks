@@ -16,6 +16,10 @@ a type tells you something about its constructors. In Coq the classic example is
 
 (* Although you can always make everything an index and just happen to use it uniformly over the constructors, the induction principle Coq generates is much better if you make uniform indices parameters instead, as illustrated here. *)
 
+
+(* we use undo intentionally so disable the warning about its efficiency *)
+Set Warnings "-undo-batch-mode".
+
 Module UsingParameter.
   Inductive F (T:Type) : nat -> Type :=
   | C1 : T -> F T 0

@@ -8,3 +8,6 @@ NoInit.vo: NoInit.v
 
 %.vo: %.v
 	coqc -q $< -o $@
+
+clean:
+	rm -f *.vo
