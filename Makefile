@@ -4,10 +4,14 @@ VO_FILES := $(COQ_FILES:.v=.vo)
 all: $(VO_FILES)
 
 NoInit.vo: NoInit.v
-	coqc -q -noinit $< -o $@
+	coqc -q -R . Top -noinit $< -o $@
+
+# the one dependency in these examples
+Learn/Example.vo: Learn/Learn.vo
 
 %.vo: %.v
-	coqc -q $< -o $@
+	coqc -q -R . Top $< -o $@
 
 clean:
 	rm -f *.vo
+	rm -f Learn/*.vo
