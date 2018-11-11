@@ -74,6 +74,7 @@ If you have a trick you've found useful feel free to submit an issue or pull req
 * Record fields that are functions can be written in definition-style syntax with the parameters bound after the record name, eg `{| func x y := x + y; |}` (see [RecordFunction.v](RecordFunction.v) for a complete example).
 * If you have a coercion `get_function : MyRecord >-> Funclass` you can use `Add Printing Coercion get_function` and then add a notation for `get_function` so your coercion can be parsed as function application but printed using some other syntax (and maybe you want that syntax to be `printing only`).
 * You can pass implicit arguments explicitly in a keyword-argument-like style, eg `nil (A:=nat)`. Use `About` to figure out argument names.
+* If you do nasty dependent pattern matches or use `inversion` on a goal and it produces equalities of `existT`'s, you may benefit from small inversions, described in this [blog post](http://gallium.inria.fr/blog/a-new-Coq-tactic-for-inversion/). While the small inversion tactic is still not available anywhere I can find, some support is built in to Coq's match return type inference; see [SmallInversions.v](SmallInversions.v) for examples of how to use that.
 
 ## Other Coq commands
 * `Search` vernacular variants; see [Search.v](Search.v) for examples.
