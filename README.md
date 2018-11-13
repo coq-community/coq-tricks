@@ -75,6 +75,7 @@ If you have a trick you've found useful feel free to submit an issue or pull req
 * If you have a coercion `get_function : MyRecord >-> Funclass` you can use `Add Printing Coercion get_function` and then add a notation for `get_function` so your coercion can be parsed as function application but printed using some other syntax (and maybe you want that syntax to be `printing only`).
 * You can pass implicit arguments explicitly in a keyword-argument-like style, eg `nil (A:=nat)`. Use `About` to figure out argument names.
 * If you do nasty dependent pattern matches or use `inversion` on a goal and it produces equalities of `existT`'s, you may benefit from small inversions, described in this [blog post](http://gallium.inria.fr/blog/a-new-Coq-tactic-for-inversion/). While the small inversion tactic is still not available anywhere I can find, some support is built in to Coq's match return type inference; see [SmallInversions.v](SmallInversions.v) for examples of how to use that.
+* You can use tactics-in-terms with notations to write function-like definitions that are written in Ltac. For example, you can use this facility to write macros that inspect and transform Gallina terms, producing theorem statements and optionally their proofs automatically. A simple example is given in [DefEquality.v](DefEquality.v) of writing a function that produces an equality for unfolding a definition.
 
 ## Other Coq commands
 * `Search` vernacular variants; see [Search.v](Search.v) for examples.
