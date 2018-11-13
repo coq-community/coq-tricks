@@ -1,3 +1,7 @@
+(* using a tactic notation rather than an ordinary Ltac function ensures that
+the argument is parsed appropriately (in this case it's probably not necessary
+but you can for example make the argument a uconstr (an untyped term), a
+reference (for passing to unfold), or a tactic *)
 Local Tactic Notation "unfolded_eq" constr(pf) :=
   let x := (eval red in pf) in
   exact (eq_refl : (pf = x)).
