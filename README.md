@@ -11,7 +11,7 @@ If you have a trick you've found useful feel free to submit an issue or pull req
 * `lazymatch` for better error messages
 * `deex` tactic
 * `::=` to re-define Ltac
-* `learn` approach - see [Learn.v](Learn.v) for a self-contained example or [Clément's thesis](http://pit-claudel.fr/clement/MSc/#org036d20e) for more details
+* `learn` approach - see [Learn.v](src/Learn.v) for a self-contained example or [Clément's thesis](http://pit-claudel.fr/clement/MSc/#org036d20e) for more details
 * `unshelve` tactical, especially useful with an eapply - good example use case is constructing an object by refinement where the obligations end up being your proofs with the values as evars, when you wanted to construct the values by proof
 * `unfold "+"` works
 * `destruct matches` tactic
@@ -20,17 +20,17 @@ If you have a trick you've found useful feel free to submit an issue or pull req
 * strong induction is in the standard library: `Require Import Arith.` and use `induction n as [n IHn] using lt_wf_ind.`
 * induction on the length of a list: `Require Import Coq.Arith.Wf_nat.` and `induction xs as [xs IHxs] using (induction_ltof1 _ (@length _)); unfold ltof in IHxs.`
 * `debug auto`, `debug eauto`, and `debug trivial` give traces, including failed invocations. `info_auto`, `info_eauto`, and `info_trivial` are less verbose ways to debug which only report what the resulting proof includes
-* `constructor` and `econstructor` backtrack over the constructors over an inductive, which lets you do fun things exploring the constructors of an inductive type. See [Constructors.v](Constructors.v) for some demonstrations.
+* `constructor` and `econstructor` backtrack over the constructors over an inductive, which lets you do fun things exploring the constructors of an inductive type. See [Constructors.v](src/Constructors.v) for some demonstrations.
 * There's a way to destruct and maintain an equality: `destruct_with_eqn x`.
   You can also do `destruct x eqn:H` to explicitly name the equality
   hypothesis. This is similar to `case_eq x; intros`; I'm not sure what the
   practical differences are.
 * `rew H in t` notation to use `eq_rect` for a (safe) "type cast". Need to
-  import `EqNotations` - see [RewNotation.v](RewNotation.v) for a working
+  import `EqNotations` - see [RewNotation.v](src/RewNotation.v) for a working
   example.
-* `intro`-patterns can be combined in a non-trivial way: `intros [=->%lemma]` -- see [IntroPatterns.v](IntroPatterns.v).
+* `intro`-patterns can be combined in a non-trivial way: `intros [=->%lemma]` -- see [IntroPatterns.v](src/IntroPatterns.v).
 * `change` tactic supports patterns (`?var`): e.g. `repeat change (fun x => ?f x) with f` would eta-reduce all the functions (of arbitrary arity) in the goal.
-* One way to implement a tactic that sleeps for n seconds is in [Sleep.v](Sleep.v).
+* One way to implement a tactic that sleeps for n seconds is in [Sleep.v](src/Sleep.v).
 * Some tactics take an "[occurrence clause](https://coq.inria.fr/refman/proof-engine/tactics.html#occurrences-sets-and-occurrences-clauses)" to select where they apply. The common ones are `in *` and `in H` to apply everywhere and in a specific hypotheses, but there are actually a bunch of forms. The syntax is really silly so I'm just going to give examples and hope they help.
   - `in H1, H2` (just `H1` and `H2`)
   - `in H1, H2 |- *` (`H1`, `H2`, and the goal)
@@ -64,26 +64,26 @@ If you have a trick you've found useful feel free to submit an issue or pull req
   * `Program Fixpoint` may be useful when defining a nested recursive function. See [manual](https://coq.inria.fr/refman/program.html#hevea_command290) and [this StackOverflow post](https://stackoverflow.com/questions/10292421/error-in-defining-ackermann-in-coq).
   * [CPDT's way](http://adam.chlipala.net/cpdt/html/Cpdt.GeneralRec.html) of defining general recursive functions with `Fix` combinator.
 * One can pattern-match on tuples under lambdas: `Definition fst {A B} : (A * B) -> A := fun '(x,_) => x.` (works since Coq 8.6).
-* Records fields can be defined with `:>`, which make that field accessor a coercion. There are three ways to use this (since there are three types of coercion classes). See [Coercions.v](Coercions.v) for some concrete examples.
+* Records fields can be defined with `:>`, which make that field accessor a coercion. There are three ways to use this (since there are three types of coercion classes). See [Coercions.v](src/Coercions.v) for some concrete examples.
   - If the field is an ordinary type, the record can be used as that type (the field will implicitly be accessed). One good use case for this is whenever a record includes another record; this coercion will make the field accessors of the sub-record work for the outer record as well. (This is vaguely similar to [Go embedded structs](https://golang.org/doc/effective_go.html#embedding))
   - If the field has a function type, the record can be called.
   - If the field is a sort (eg, `Type`), then the record can be used as a type.
 * When a Class field (as opposed to a record) is defined with `:>`, it becomes a hint for typeclass resolution. This is useful when a class includes a "super-class" requirement as a field. For example, `Equivalence` has fields for reflexivity, symmetry, and transitivity. The reflexivity field can be used to generically take an `Equivalence` instance and get a reflexivity instance for free.
-* The type classes in RelationClasses are useful but can be repetitive to prove. [RelationInstances.v](RelationInstances.v) goes through a few ways of making these more convenient, and why you would want to do so (basically you can make `reflexivity`, `transitivity`, and `symmetry` more powerful).
-* The types of inductives can be definitions, as long as they expand to an "arity" (a function type ending in `Prop`, `Set`, or `Type`). See [ArityDefinition.v](ArityDefinition.v).
-* Record fields that are functions can be written in definition-style syntax with the parameters bound after the record name, eg `{| func x y := x + y; |}` (see [RecordFunction.v](RecordFunction.v) for a complete example).
+* The type classes in RelationClasses are useful but can be repetitive to prove. [RelationInstances.v](src/RelationInstances.v) goes through a few ways of making these more convenient, and why you would want to do so (basically you can make `reflexivity`, `transitivity`, and `symmetry` more powerful).
+* The types of inductives can be definitions, as long as they expand to an "arity" (a function type ending in `Prop`, `Set`, or `Type`). See [ArityDefinition.v](src/ArityDefinition.v).
+* Record fields that are functions can be written in definition-style syntax with the parameters bound after the record name, eg `{| func x y := x + y; |}` (see [RecordFunction.v](src/RecordFunction.v) for a complete example).
 * If you have a coercion `get_function : MyRecord >-> Funclass` you can use `Add Printing Coercion get_function` and then add a notation for `get_function` so your coercion can be parsed as function application but printed using some other syntax (and maybe you want that syntax to be `printing only`).
 * You can pass implicit arguments explicitly in a keyword-argument-like style, eg `nil (A:=nat)`. Use `About` to figure out argument names.
-* If you do nasty dependent pattern matches or use `inversion` on a goal and it produces equalities of `existT`'s, you may benefit from small inversions, described in this [blog post](http://gallium.inria.fr/blog/a-new-Coq-tactic-for-inversion/). While the small inversion tactic is still not available anywhere I can find, some support is built in to Coq's match return type inference; see [SmallInversions.v](SmallInversions.v) for examples of how to use that.
-* You can use tactics-in-terms with notations to write function-like definitions that are written in Ltac. For example, you can use this facility to write macros that inspect and transform Gallina terms, producing theorem statements and optionally their proofs automatically. A simple example is given in [DefEquality.v](DefEquality.v) of writing a function that produces an equality for unfolding a definition.
+* If you do nasty dependent pattern matches or use `inversion` on a goal and it produces equalities of `existT`'s, you may benefit from small inversions, described in this [blog post](http://gallium.inria.fr/blog/a-new-Coq-tactic-for-inversion/). While the small inversion tactic is still not available anywhere I can find, some support is built in to Coq's match return type inference; see [SmallInversions.v](src/SmallInversions.v) for examples of how to use that.
+* You can use tactics-in-terms with notations to write function-like definitions that are written in Ltac. For example, you can use this facility to write macros that inspect and transform Gallina terms, producing theorem statements and optionally their proofs automatically. A simple example is given in [DefEquality.v](src/DefEquality.v) of writing a function that produces an equality for unfolding a definition.
 
 ## Other Coq commands
-* `Search` vernacular variants; see [Search.v](Search.v) for examples.
+* `Search` vernacular variants; see [Search.v](src/Search.v) for examples.
 * `Search s -Learnt` for a search of local hypotheses excluding Learnt
 * `Locate` can search for notation, including partial searches.
 * `Optimize Heap` (undocumented) runs GC (specifically [`Gc.compact`](https://caml.inria.fr/pub/docs/manual-ocaml/libref/Gc.html))
 * `Optimize Proof` (undocumented) runs several simplifications on the current proof term (see [`Proofview.compact`](https://github.com/coq/coq/blob/9a4ca53a3a021cb16de7706ec79a26e49f54de49/engine/proofview.ml#L40))
-* `Generalizable Variable A` enables implicit generalization; `Definition id \`(x:A) := x` will implicitly add a parameter `A` before `x`. `Generalizable All Variables` enables implicit generalization for any identifier. Note that this surprisingly allows generalization without a backtick in Instances; see [InstanceGeneralization.v](InstanceGeneralization.v). [Issue #6030](https://github.com/coq/coq/issues/6030) generously requests this behavior be documented, but it should probably require enabling some option.
+* `Generalizable Variable A` enables implicit generalization; `Definition id \`(x:A) := x` will implicitly add a parameter `A` before `x`. `Generalizable All Variables` enables implicit generalization for any identifier. Note that this surprisingly allows generalization without a backtick in Instances; see [InstanceGeneralization.v](src/InstanceGeneralization.v). [Issue #6030](https://github.com/coq/coq/issues/6030) generously requests this behavior be documented, but it should probably require enabling some option.
 * `Check` supports partial terms, printing a type along with a context of evars. A cool example is `Check (id _ _)`, where the first underscore must be a function (along with other constraints on the types involved).
 * `Unset Intuition Negation Unfolding` will cause  `intuition` to stop unfolding `not`.
 * Definitions can be normalized (simplified/computed) easily with `Definition bar := Eval compute in foo.`
@@ -97,5 +97,5 @@ If you have a trick you've found useful feel free to submit an issue or pull req
 
 ## Using Coq
 * You can pass `-noinit` to `coqc` or `coqtop` to avoid loading the standard library.
-  * Ltac is provided as a plugin loaded by the standard library; to load it you need `Declare ML Module "ltac_plugin".` (see [NoInit.v](NoInit.v)).
+  * Ltac is provided as a plugin loaded by the standard library; to load it you need `Declare ML Module "ltac_plugin".` (see [NoInit.v](src/NoInit.v)).
   * Numeral notations are only provided by the prelude, even if you issue `Require Import Coq.Init.Datatypes`.
