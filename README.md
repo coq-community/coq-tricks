@@ -11,7 +11,7 @@ If you have a trick you've found useful feel free to submit an issue or pull req
 * `lazymatch` for better error messages
 * `deex` tactic
 * `::=` to re-define Ltac
-* `learn` approach - see [Clément's thesis](http://pit-claudel.fr/clement/MSc/#org036d20e)
+* `learn` approach - see [Learn.v](Learn.v) for a self-contained example or [Clément's thesis](http://pit-claudel.fr/clement/MSc/#org036d20e) for more details
 * `unshelve` tactical, especially useful with an eapply - good example use case is constructing an object by refinement where the obligations end up being your proofs with the values as evars, when you wanted to construct the values by proof
 * `unfold "+"` works
 * `destruct matches` tactic
