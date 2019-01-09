@@ -77,6 +77,12 @@ If you have a trick you've found useful feel free to submit an issue or pull req
 * You can pass implicit arguments explicitly in a keyword-argument-like style, eg `nil (A:=nat)`. Use `About` to figure out argument names.
 * If you do nasty dependent pattern matches or use `inversion` on a goal and it produces equalities of `existT`'s, you may benefit from small inversions, described in this [blog post](http://gallium.inria.fr/blog/a-new-Coq-tactic-for-inversion/). While the small inversion tactic is still not available anywhere I can find, some support is built in to Coq's match return type inference; see [SmallInversions.v](src/SmallInversions.v) for examples of how to use that.
 * You can use tactics-in-terms with notations to write function-like definitions that are written in Ltac. For example, you can use this facility to write macros that inspect and transform Gallina terms, producing theorem statements and optionally their proofs automatically. A simple example is given in [DefEquality.v](src/DefEquality.v) of writing a function that produces an equality for unfolding a definition.
+* Notations can be dangerous since they by default have global scope and are imported by `Import`, with no way to selectively import. A pattern I now use by default to make notations controllable is to define every notation in a module with a scope; see [NotationModule.v](src/NotationModule.v).
+
+  This pattern has several advantages:
+  - notations are only loaded as needed, preventing conflicts when not using the notations
+  - the notations can be brought into scope everywhere as needed with `Import` and `Local Open Scope`, restoring the convenience of a global notation
+  - if notations conflict, some of them can always be scoped appropriately
 
 ## Other Coq commands
 * `Search` vernacular variants; see [Search.v](src/Search.v) for examples.
