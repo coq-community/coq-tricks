@@ -1,6 +1,6 @@
-dist: trusty
+dist: xenial
 sudo: required
-language: generic
+language: minimal
 
 services:
   - docker
