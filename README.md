@@ -31,14 +31,14 @@ If you have a trick you've found useful feel free to submit an issue or pull req
 * `intro`-patterns can be combined in a non-trivial way: `intros [=->%lemma]` -- see [IntroPatterns.v](src/IntroPatterns.v).
 * `change` tactic supports patterns (`?var`): e.g. `repeat change (fun x => ?f x) with f` would eta-reduce all the functions (of arbitrary arity) in the goal.
 * One way to implement a tactic that sleeps for n seconds is in [Sleep.v](src/Sleep.v).
-* Some tactics take an "[occurrence clause](https://coq.inria.fr/refman/proof-engine/tactics.html#occurrences-sets-and-occurrences-clauses)" to select where they apply. The common ones are `in *` and `in H` to apply everywhere and in a specific hypotheses, but there are actually a bunch of forms. The syntax is really silly so I'm just going to give examples and hope they help.
+* Some tactics take an "[occurrence clause](https://coq.inria.fr/refman/proof-engine/tactics.html#occurrences-sets-and-occurrences-clauses)" to select where they apply. The common ones are `in *` and `in H` to apply everywhere and in a specific hypotheses, but there are actually a bunch of forms, for example:
   - `in H1, H2` (just `H1` and `H2`)
   - `in H1, H2 |- *` (`H1`, `H2`, and the goal)
   - `in * |-` (just hypotheses)
   - `in |-` (nowhere)
   - `in |- *` (just the goal, same as leaving the whole thing off)
   - `in * |- *` (everywhere, same as `in *`)
-  Why have all these forms, particularly the last two? They're useless, but if Coq ever supported first-class occurrence sets (that is, you could write tactics that takes occurrence sets and operate on them) they might be handy. Except `in |-`, which is probably useless and just an artifact of the grammar.
+  These forms would be especially useful if occurrence clauses were first-class objects; that is, if tactics could take and pass occurrence clauses. Currently user-defined tactics support occurrence clauses via a set of tactic notations.
 * You can use notations to shorten repetitive Ltac patterns (much like Haskell's [PatternSynonyms](https://ghc.haskell.org/trac/ghc/wiki/PatternSynonyms#Motivatingexample)). Define a notation with holes (underscores) and use it in an Ltac match, eg `Notation anyplus := (_ + _).` and then
     ```
     match goal with
