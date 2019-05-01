@@ -53,6 +53,7 @@ If you have a trick you've found useful feel free to submit an issue or pull req
 * You can use the `set` tactic to create shorthand names for expressions. These are special `let`-bound variables and show up in the hypotheses as `v := def`. To "unfold" these definitions you can do `subst v` (note the explicit name is required, `subst` will not do this by default). This is a good way to make large goals readable, perhaps while figuring out what lemma to extract. It can also be useful if you need to refer these expressions.
 * When you write a function in proof mode (useful when dependent types are involved), you probably want to end the proof with `Defined` instead of `Qed`. The difference is that `Qed` makes the proof term opaque and prevents reduction, while `Defined` will simplify correctly. If you mix computational parts and proof parts (eg, functions which produce sigma types) then you may want to separate the proof into a lemma so that it doesn't get unfolded into a large proof term.
 * To make an evar an explicit goal, you can use this trick: `unshelve (instantiate (1:=_))`. The way this work is to instantiate the evar with a fresh evar (created due to the `_`) and then unshelve that evar, making it an explicit goal. See [UnshelveInstantiate.v](src/UnshelveInstantiate.v) for a working example.
+* The `enough` tactic behaves like `assert` but puts the goal for the stated fact after the current goal rather than before.
 
 ## Gallina
 * tactics in terms, eg `ltac:(eauto)` can provide a proof argument
