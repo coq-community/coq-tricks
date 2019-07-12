@@ -6,12 +6,13 @@ Qed.
 
 Goal true <> false.
 Proof.
-  refine (fun H => match H with eq_refl => I end).
+  refine (fun H => match H with end).
+  (* You could also write [refine (fun H => match H with eq_refl => I end).] *)
 Qed.
 
 Goal forall P, true = false -> P.
 Proof.
-  refine (fun P H => match H with eq_refl => I end).
+  refine (fun P H => match H with end).
 Qed.
 
 Local Set Boolean Equality Schemes.
@@ -24,5 +25,5 @@ Definition foo_dec_bl x y : foo_beq x y = true -> x = y
      | c, c
      | d, d
        => fun _ => eq_refl
-     | _, _ => fun H : false = true => match H with eq_refl => I end
+     | _, _ => fun H : false = true => match H with end
      end.
