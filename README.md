@@ -7,14 +7,23 @@ Some tips, tricks, and features in Coq that are hard to discover.
 If you have a trick you've found useful feel free to submit an issue or pull request!
 
 ## Ltac
-* `pattern` tactic
-* `lazymatch` for better error messages
-* `deex` tactic
-* `::=` to re-define Ltac
+
+* The `pattern` tactic generalizes an expression over a variable. For example, `pattern y` transforms a goal of `P x y z` into `(fun y => P x y z) y`. An especially useful way to use this is to pattern match on `eval pattern y in constr:(P x y z)` to extract just the function.
+* `lazymatch` is like `match` but without backtracking on failures inside the match action. If you're not using failures for backtracking (this is often the case), then `lazymatch` gets better error messages because an error inside the action becomes the overall error message rather than the uninformative "no match" error message. (The semantics of `match` mean Coq can't do obviously do better - it can't distinguish between a bug in the action and intentionally using the failure to prevent pattern matching.)
+* `deex` (see [Deex.v](src/Deex.v)) is a useful tactic for extracting the witness from an `exists` hypothesis while preserving the name of the witness and hypothesis.
+* `Ltac t ::= foo.` re-defines the tactic `t` to `foo`. This changes the _binding_, so tactics that refer to `t` will use the new definition. You can use this for a form of extensibility: write `Ltac hook := fail` and then use
+  ```
+  repeat match goal with
+         | (* initial cases *)
+         | _ => hook
+         | (* other cases *)
+         end
+  ```
+  in your tactic. Now the user can insert an extra case in your tactic's core loop by overriding `hook`.
 * `learn` approach - see [Learn.v](src/Learn.v) for a self-contained example or [Clément's thesis](http://pit-claudel.fr/clement/MSc/#org036d20e) for more details
 * `unshelve` tactical, especially useful with an eapply - good example use case is constructing an object by refinement where the obligations end up being your proofs with the values as evars, when you wanted to construct the values by proof
 * `unfold "+"` works
-* `destruct matches` tactic
+* `destruct matches` tactic; see [coq-tactical's SimplMatch.v](https://github.com/tchajed/coq-tactical/blob/master/src/SimplMatch.v)
 * using `instantiate` to modify evar environment (thanks to Jonathan Leivent on coq-club)
 * `eexists ?[x]` lets one name an existential variable to be able to refer to it later
 * strong induction is in the standard library: `Require Import Arith.` and use `induction n as [n IHn] using lt_wf_ind.`
