@@ -118,12 +118,12 @@ If you have a trick you've found useful feel free to submit an issue or pull req
   - If you write a general-purpose tactic `t` that solves most goals in a section, it gets annoying to write `Proof. t. Qed.` every time. Instead, define `Notation magic := ltac:(t) (only parsing).` and write `Definition foo l : l = l ++ [] = magic.`. You do unfortunately have to write `Definition`; `Lemma` and `Theorem` do not support `:=` definitions. You don't have to call it `magic` but of course it's more fun that way. Note that this isn't the best plan because you end up with transparent proofs, which isn't great; ideally Coq would just support `Theorem foo :=` syntax for opaque proofs.
 - Haskell has an operator `f $ x`, which is the same as `f x` except that its parsed differently: `f $ 1 + 1` means `f (1 + 1)`, avoiding parentheses. You can simulate this in Coq with a notation: `Notation "f $ x" := (f x) (at level 60, right associativity, only parsing).` (from [jwiegley/coq-haskell](https://github.com/jwiegley/coq-haskell/blob/83a5db4b5741745ec9d522543d3616c308dfb542/src/Prelude.v#L15)).
 - A useful convention for notations is to have them start with a word and an exclamation mark. This is borrowed from @andres-erbsen, who borrowed it from the Rust macro syntax. An example of using this convention is in [Macros.v](src/Macros.v). There are three big advantages to this approach: first, using it consistently alerts readers that a macro is being used, and second, using names makes it much easier to create many macros compared to inventing ASCII syntax, and third, starting every macro with a keyword makes them much easier to get parsing correctly.
-
 - To declare an axiomatic instance of a typeclass, use `Declare Instance foo : TypeClass`. This replaces the now-deprecated option `Typeclasses Axioms Are Instances` which allows one to use `Axiom` (this was the default behavior in Coq 8.7), as well as the pattern of `Axiom` + `Existing Instance`.
 - To make Ltac scripts more readable, you can use `Set Default Goal Selector "!".`, which will enforce that every Ltac command (sentence) be applied to exactly one focused goal. You achieve that by using a combination of bullets and braces. As a result, when reading a script you can always see the flow of where multiple goals are generated and solved.
 
 ## Using Coq
 
 - You can pass `-noinit` to `coqc` or `coqtop` to avoid loading the standard library.
-  - Ltac is provided as a plugin loaded by the standard library; to load it you need `Declare ML Module "ltac_plugin".` (see [NoInit.v](src/NoInit.v)).
-  - Numeral notations are only provided by the prelude, even if you issue `Require Import Coq.Init.Datatypes`.
+- Ltac is provided as a plugin loaded by the standard library; to load it you need `Declare ML Module "ltac_plugin".` (see [NoInit.v](src/NoInit.v)).
+- Numeral notations are only provided by the prelude, even if you issue `Require Import Coq.Init.Datatypes`.
+- If you use Coq master, the latest Coq reference manual is built and deployed to <https://coq.github.io/doc/master/refman/index.html> automatically.
