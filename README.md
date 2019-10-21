@@ -63,6 +63,8 @@ If you have a trick you've found useful feel free to submit an issue or pull req
 - When you write a function in proof mode (useful when dependent types are involved), you probably want to end the proof with `Defined` instead of `Qed`. The difference is that `Qed` makes the proof term opaque and prevents reduction, while `Defined` will simplify correctly. If you mix computational parts and proof parts (eg, functions which produce sigma types) then you may want to separate the proof into a lemma so that it doesn't get unfolded into a large proof term.
 - To make an evar an explicit goal, you can use this trick: `unshelve (instantiate (1:=_))`. The way this work is to instantiate the evar with a fresh evar (created due to the `_`) and then unshelve that evar, making it an explicit goal. See [UnshelveInstantiate.v](src/UnshelveInstantiate.v) for a working example.
 - The `enough` tactic behaves like `assert` but puts the goal for the stated fact after the current goal rather than before.
+- You can use `context E [x]` to bind a context variable, and then `let e := eval context E [y] in ...` to substitute back into the context. See
+  [Context.v](src/Context.v) for an example.
 
 ## Gallina
 
