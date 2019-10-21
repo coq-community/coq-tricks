@@ -100,6 +100,8 @@ If you have a trick you've found useful feel free to submit an issue or pull req
   - the notations can be brought into scope everywhere as needed with `Import` and `Local Open Scope`, restoring the convenience of a global notation
   - if notations conflict, some of them can always be scoped appropriately
 
+- Coq has a module system, modeled after ML (eg, the one used in OCaml). You can see some simple examples of using it in [Modules.v](src/Modules.v). In user code, I've found modules to be more trouble than their worth 90% of the time - the biggest issue is that once something is in a module type, the only way to extend it is with a new module that wraps an existing module, and the only way to use the extension is to instantiate it. At the same time, you can mostly simulate module types with records.
+
 ## Other Coq commands
 
 - `Search` vernacular variants; see [Search.v](src/Search.v) for examples.
