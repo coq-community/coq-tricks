@@ -1,6 +1,6 @@
-dist: xenial
-sudo: required
-language: minimal
+dist: bionic
+language: shell
+os: linux
 
 services:
   - docker
@@ -8,7 +8,7 @@ services:
 env:
   global:
   - NJOBS="2"
-  matrix:
+  jobs:
   - COQ_IMAGE="coqorg/coq:dev"
   - COQ_IMAGE="coqorg/coq:8.11"
 
