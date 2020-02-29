@@ -3,7 +3,7 @@
 Section Example.
   Context (A:Type).
   Parameter P Q: A -> Prop.
-  Definition filter: forall {a}, P a -> A:= fun a Pa=> a.
+  Definition filter {a} : P a -> A := fun Pa => a.
 
   Lemma my_lemma:
     forall a b, Q b -> (Q b -> P a) ->
