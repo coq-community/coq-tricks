@@ -131,7 +131,7 @@ If you have a trick you've found useful feel free to submit an issue or pull req
 
   Note that Coq also has `vok` files; it's possible to check the missing proofs in a `vos` file, but this does not produce a `vo` and so all Coq can do is record that the proofs have been checked. They can also be compiled in parallel within a single file, although I don't know how to do that. Compiling `vok`s lets you fairly confidently check proofs, but to really check everything (particularly universe constraints) you need to build `vo` files from scratch.
 
-  Signature files have one big caveat: if Coq cannot determine the type of a theorem or the proof ends with `Defined` (and thus might be relevant to later type-checking), it has to run the proof. It does so _silently_, potentially eliminating any performance benefit. The main reason this happens is due to proofs in a section that don't annotate which section variables are used with `Proof using`.
+  Signature files have one big caveat: if Coq cannot determine the type of a theorem or the proof ends with `Defined` (and thus might be relevant to later type-checking), it has to run the proof. It does so _silently_, potentially eliminating any performance benefit. The main reason this happens is due to proofs in a section that don't annotate which section variables are used with `Proof using`. Generally this can be fixed with `Set Default Proof Using "Type"`, though only on Coq master and not on Coq 8.11.0.
 
 ## Using Coq
 
