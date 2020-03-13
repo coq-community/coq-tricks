@@ -134,6 +134,8 @@ If you have a trick you've found useful feel free to submit an issue or pull req
 
   Signature files have one big caveat: if Coq cannot determine the type of a theorem or the proof ends with `Defined` (and thus might be relevant to later type-checking), it has to run the proof. It does so _silently_, potentially eliminating any performance benefit. The main reason this happens is due to proofs in a section that don't annotate which section variables are used with `Proof using`. Generally this can be fixed with `Set Default Proof Using "Type"`, though only on Coq master and not on Coq 8.11.0.
 
+- Coq 8.12+alpha has a new feature `Set Printing Parentheses` that prints parentheses as if no notations had an associativity. For example, this will print `(1,2,3)` as `((1,2),3)`. This is much more readable than entirely disabling notations.
+
 ## Using Coq
 
 - You can pass `-noinit` to `coqc` or `coqtop` to avoid loading the standard library.
