@@ -65,6 +65,7 @@ If you have a trick you've found useful feel free to submit an issue or pull req
 - The `enough` tactic behaves like `assert` but puts the goal for the stated fact after the current goal rather than before.
 - You can use `context E [x]` to bind a context variable, and then `let e := eval context E [y] in ...` to substitute back into the context. See
   [Context.v](src/Context.v) for an example.
+- If you have a second-order match (using `@?z x`, which bind `z` to a function) and you want to apply the function, there's a trick involving a seemingly useless match. See [LtacGallinaApplication.v](src/LtacGallinaApplication.v) for an example.
 
 ## Gallina
 
