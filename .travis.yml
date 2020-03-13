@@ -6,15 +6,13 @@ services:
   - docker
 
 env:
-  global:
-  - NJOBS="2"
   jobs:
-  - COQ_IMAGE="coqorg/coq:dev"
-  - COQ_IMAGE="coqorg/coq:8.11"
+  - COQ_VERSION="dev"
+  - COQ_VERSION="8.11"
 
 install: |
   # Prepare the COQ container
-  docker run -d -i --init --name=COQ -v ${TRAVIS_BUILD_DIR}:/home/coq/demo -w /home/coq/demo ${COQ_IMAGE}
+  docker run -d -i --init --name=COQ -v ${TRAVIS_BUILD_DIR}:/home/coq/build -w /home/coq/build "coqorg/coq:${COQ_VERSION}"
   docker exec COQ /bin/bash --login -c "
     # This bash script is double-quoted to interpolate Travis CI env vars:
     echo \"Build triggered by ${TRAVIS_EVENT_TYPE}\"
@@ -29,11 +27,11 @@ before_script:
 - |
   docker exec COQ /bin/bash --login -c "
     export PS4='+ \e[33;1m(\$0 @ line \$LINENO) \$\e[0m '
-    sudo chown -R coq:coq /home/coq/demo
+    sudo chown -R coq:coq /home/coq/build
     "
 script:
 - echo -e "${ANSI_YELLOW}Building ${TRAVIS_REPO_SLUG}...${ANSI_RESET}" && echo -en 'travis_fold:start:build\\r'
-- docker exec COQ /bin/bash --login -c "make -k all"
+- docker exec COQ /bin/bash --login -c "make -j2 -k all"
 - echo -en 'travis_fold:end:build\\r'
 
 after_script:
