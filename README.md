@@ -114,6 +114,7 @@ If you have a trick you've found useful feel free to submit an issue or pull req
 - `Optimize Proof` (undocumented) runs several simplifications on the current proof term (see [`Proofview.compact`](https://github.com/coq/coq/blob/9a4ca53a3a021cb16de7706ec79a26e49f54de49/engine/proofview.ml#L40))
 - `Generalizable Variable A` enables implicit generalization; `` Definition id `(x:A) := x `` will implicitly add a parameter `A` before `x`. `Generalizable All Variables` enables implicit generalization for any identifier. Note that this surprisingly allows generalization without a backtick in Instances; see [InstanceGeneralization.v](src/InstanceGeneralization.v). [Issue #6030](https://github.com/coq/coq/issues/6030) generously requests this behavior be documented, but it should probably require enabling some option.
 - `Check` supports partial terms, printing a type along with a context of evars. A cool example is `Check (id _ _)`, where the first underscore must be a function (along with other constraints on the types involved).
+- The above also works with named existentials. For example, `Check ?[x] + ?[y]` works.
 - `Unset Intuition Negation Unfolding` will cause `intuition` to stop unfolding `not`.
 - Definitions can be normalized (simplified/computed) easily with `Definition bar := Eval compute in foo.`
 - `Set Uniform Inductive Parameters` (in Coq v8.9+beta onwards) allows you to omit the uniform parameters to an inductive in the constructors.
