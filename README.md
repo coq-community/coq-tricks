@@ -67,6 +67,7 @@ If you have a trick you've found useful feel free to submit an issue or pull req
   [Context.v](src/Context.v) for an example.
 - If you have a second-order match (using `@?z x`, which bind `z` to a function) and you want to apply the function, there's a trick involving a seemingly useless match. See [LtacGallinaApplication.v](src/LtacGallinaApplication.v) for an example.
 - `auto with foo nocore` with the pseudo-database `nocore` disables the default `core` hint databases and only uses hints from `foo` (and the context).
+- If you need to apply a theorem to a hypothesis and then immediately destruct the result, there's a concise way to do it without repetition: `apply thm in H as [x H]`, for example, might be used then `thm` produces an existential for a variable named `x`.
 
 ## Gallina
 
