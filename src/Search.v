@@ -7,7 +7,7 @@ Search plus minus.
 (* searching for notations - note that this has to be a token corresponding to
 exactly one notation (for more general searches, first find the right pattern
 with Locate and then search for that) *)
-Search "mod" "/".
+Search "/" "+".
 
 (* search patterns can be non-linear (within one component) *)
 Search (_ + ?a - ?a).
@@ -25,9 +25,15 @@ Search list outside List.
 
 Search plus inside List.
 
-(* searches use the name of the theorem of the string does not resolve to a
-notation *)
+(* searches use the name of the theorem if the string is an identifier *)
 Search "dec" "<".
+
+(* mod is part of a notation, but searching for ["mod"] will look for the string
+in the lemma name; to search for the notation search for the keyword with
+["'mod'"]. (note that Nat.testbit_eqb, for example, does not have mod in the name) *)
+Search "'mod'" 2.
+(* the above search would probably be better done like this: *)
+Search (_ mod 2).
 
 (* note that requiring ssreflect in _any transitive dependency_ hijacks the
 built-in Search and replaces it with ssreflect, which is similar but slightly
