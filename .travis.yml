@@ -8,6 +8,7 @@ services:
 env:
   jobs:
   - COQ_VERSION="dev"
+  - COQ_VERSION="8.12"
   - COQ_VERSION="8.11"
 
 install: |
