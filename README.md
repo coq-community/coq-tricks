@@ -140,7 +140,8 @@ If you have a trick you've found useful feel free to submit an issue or pull req
 
 - Coq 8.12+alpha has a new feature `Set Printing Parentheses` that prints parentheses as if no notations had an associativity. For example, this will print `(1,2,3)` as `((1,2),3)`. This is much more readable than entirely disabling notations.
 - You can use `Export Set` to set options in a way that affects any file directly importing the file (but not transitively importing, the way `Global Set` works). This allows a project to locally set up defaults with an `options.v` file with all of its options, which every file imports. You can use this for basic sanity settings, like `Set Default Proof Using "Type".` and `Set Default Goal Selector "!"` without forcing them on all projects that import your project.
-- You can use `Fail idtac.` to assert that a proof is complete. This is useful when you'll use `Admitted.` but want to document (and check in CI) that the proof is complete other than the `admit.` tactics used.
+- You can use `all: fail "goals remaining".` to assert that a proof is complete. This is useful when you'll use `Admitted.` but want to document (and check in CI) that the proof is complete other than the `admit.` tactics used.
+- You can also use `Fail idtac.` to assert that a proof is complete, which is shorter than the above but more arcane.
 - You can use `Fail Fail Qed.` to really assert that a proof is complete, including doing universe checks, but then still be able to `Restart` it. I think this is only useful for illustrating small examples but it's amusing that it works.
 
 ## Using Coq
