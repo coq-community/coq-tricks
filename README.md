@@ -1,6 +1,6 @@
 # Tricks in Coq
 
-[![Build Status](https://travis-ci.org/tchajed/coq-tricks.svg?branch=master)](https://travis-ci.org/tchajed/coq-tricks)
+[![Build Status](https://travis-ci.com/tchajed/coq-tricks.svg?branch=master)](https://travis-ci.com/tchajed/coq-tricks)
 
 Some tips, tricks, and features in Coq that are hard to discover.
 
