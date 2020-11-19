@@ -1,5 +1,5 @@
-dist: bionic
-language: shell
+dist: focal
+language: generic
 os: linux
 
 services:
@@ -8,7 +8,7 @@ services:
 env:
   jobs:
   - COQ_VERSION="dev"
-  - COQ_VERSION="8.12"
+  - COQ_VERSION="latest"
   - COQ_VERSION="8.11"
 
 install: |
