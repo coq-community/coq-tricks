@@ -9,7 +9,6 @@ env:
   jobs:
   - COQ_VERSION="dev"
   - COQ_VERSION="latest"
-  - COQ_VERSION="8.11"
 
 install: |
   # Prepare the COQ container
