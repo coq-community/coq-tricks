@@ -69,6 +69,7 @@ If you have a trick you've found useful feel free to submit an issue or pull req
 - `auto with foo nocore` with the pseudo-database `nocore` disables the default `core` hint databases and only uses hints from `foo` (and the context).
 - If you need to apply a theorem to a hypothesis and then immediately destruct the result, there's a concise way to do it without repetition: `apply thm in H as [x H]`, for example, might be used then `thm` produces an existential for a variable named `x`.
 - If you have a hypothesis `H: a = b` and need `f a = f b`, you can use `apply (f_equal f) in H`. (Strictly speaking this is just using the `f_equal` theorem in the standard library, but it's also very much like the inverse direction for the `f_equal` tactic.)
+- If you want to both run Ltac and return a `constr`, you can do so by wrapping the side effect in `let _ := match goal with _ => side_effect_tactic end in ...`. See https://stackoverflow.com/questions/45949064/check-for-evars-in-a-tactic-that-returns-a-value/46178884#46178884 for Jason Gross's much more thorough explanation.
 
 ## Gallina
 
