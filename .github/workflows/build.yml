@@ -27,6 +27,8 @@ jobs:
       with:
         coq_version: ${{ matrix.coq_version }}
         ocaml_version: '4.11-flambda'
+        install: ""
+        after_install: ""
         before_script: |
           sudo chown -R coq:coq . # workaround a permission issue
         script: |
