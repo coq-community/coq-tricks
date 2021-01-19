@@ -1,4 +1,4 @@
-Require Import Recdef Div2 Omega FunctionalExtensionality.
+Require Import Recdef Div2 Lia FunctionalExtensionality.
 
 (** Counting the number of digits in binary representation. *)
 
@@ -17,7 +17,7 @@ Function attempt_2 (n r : nat) {measure (fun x => x) n} : nat :=
   | _ => attempt_2 (Nat.div2 n) (r + 1)
   end.
 Proof.
-  intros. apply lt_div2. omega.
+  intros. apply lt_div2. lia.
 Defined.
 
 Compute attempt_2 1024 0.
@@ -29,8 +29,8 @@ Function attempt_3 (n r : nat) {wf lt n} : nat :=
   | _ => attempt_3 (Nat.div2 n) (r + 1)
   end.
 Proof.
-  + intros. apply lt_div2. omega.
-  + apply lt_wf.
+  + intros. apply lt_div2. lia.
+  + apply Wf_nat.lt_wf.
 Defined.
 
 Goal
@@ -90,12 +90,12 @@ Lemma div2_smaller : forall n n',
 Proof.
   destruct n; intros.
   discriminate.
-  apply lt_div2; omega.
+  apply lt_div2; lia.
 Qed.
 
 Definition numdigits (n: nat) : nat.
   refine
-    (Fix lt_wf (fun _ => nat)
+    (Fix Wf_nat.lt_wf (fun _ => nat)
          (fun n (numdigits: forall (n':nat), n' < n -> nat) =>
             (* unfortunately we need to convoy a proof to keep track of the
             value of [n] when proving we decrease the argument to [numdigits] *)
