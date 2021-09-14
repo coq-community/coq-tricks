@@ -12,6 +12,6 @@ Goal { T:Type | T=T }.
    instantiate (T2:=ltac:(clear x)). (*remove dependency of ?T2 on x*)
    apply foo.
 
-   Grab Existential Variables.
+   Unshelve.
    all: exact nat.
 Qed.
