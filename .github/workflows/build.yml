@@ -9,11 +9,11 @@ on:
   pull_request:
   schedule:
     # Tuesday 8am UTC (3am EST)
-    - cron: '0 8 * * TUE'
+    - cron: "0 8 * * TUE"
 
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         coq_version:
@@ -24,23 +24,25 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - uses: actions/checkout@v2
-    - uses: coq-community/docker-coq-action@v1
-      with:
-        coq_version: ${{ matrix.coq_version }}
-        ocaml_version: '4.13-flambda'
-        install: ""
-        after_install: ""
-        before_script: |
-          sudo chown -R coq:coq . # workaround a permission issue
-        script: |
-          startGroup Build
-            make -j2 -k
-          endGroup
-        uninstall: |
-          make clean
-    - name: Revert permissions
-      # to avoid a warning at cleanup time
-      if: ${{ always() }}
-      run: sudo chown -R 1001:116 .
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+      - uses: coq-community/docker-coq-action@v1
+        with:
+          coq_version: ${{ matrix.coq_version }}
+          ocaml_version: "4.13-flambda"
+          install: ""
+          after_install: ""
+          before_script: |
+            sudo chown -R coq:coq . # workaround a permission issue
+          script: |
+            startGroup Build
+              make -j2 -k
+            endGroup
+          uninstall: |
+            make clean
+      - name: Revert permissions
+        # to avoid a warning at cleanup time
+        if: ${{ always() }}
+        run: sudo chown -R 1001:116 .
+      - name: Check for broken Markdown links
+        uses: gaurav-nelson/github-action-markdown-link-check@v1
