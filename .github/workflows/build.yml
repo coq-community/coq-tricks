@@ -44,3 +44,5 @@ jobs:
         # to avoid a warning at cleanup time
         if: ${{ always() }}
         run: sudo chown -R 1001:116 .
+      - name: Check for broken Markdown links
+        uses: gaurav-nelson/github-action-markdown-link-check@v1
