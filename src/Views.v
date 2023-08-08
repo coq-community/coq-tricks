@@ -1,4 +1,9 @@
-(** Some defs to work with. *)
+(** The first part of this file gives some definitions to make the case for an example of views. *)
+(** The last parts of the file demonstrate why a view may be useful. *)
+
+(** For more details, see the mathcomp book, section 5.1 on "Reflection Views" https://zenodo.org/record/7118596 *)
+(** The following is another real-world example that defines a view on a list such that the list is reversed:
+    https://github.com/math-comp/math-comp/blob/master/mathcomp/ssreflect/seq.v#L364 *)
 Require Import String.
 
 Inductive expr : Type :=
@@ -81,7 +86,7 @@ Proof.
   intros; destruct e; try (now inversion H); cbn in H.
   - (* e1 is either a value or any other expression. By destructing the view,
        this information gets reflected now: Only two goals are generated,
-       instead of 4 goals *)
+       instead of four goals *)
     destruct (e_view e1).
     (* That's basically the trick. *)
 Abort.
