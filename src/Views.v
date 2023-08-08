@@ -3,7 +3,7 @@
 
 (** For more details, see the mathcomp book, section 5.1 on "Reflection Views" https://zenodo.org/record/7118596 *)
 (** The following is another real-world example that defines a view on a list such that the list is reversed:
-    https://github.com/math-comp/math-comp/blob/master/mathcomp/ssreflect/seq.v#L364 *)
+    https://github.com/math-comp/math-comp/blob/7d5618d936496d1f99a76abeb9c636dd3ddaf293/mathcomp/ssreflect/seq.v#L360-L364
 Require Import String.
 
 Inductive expr : Type :=
