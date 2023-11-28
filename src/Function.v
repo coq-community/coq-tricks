@@ -1,4 +1,4 @@
-Require Import Recdef Div2 Lia FunctionalExtensionality.
+From Coq Require Import PeanoNat Recdef Lia FunctionalExtensionality.
 
 (** Counting the number of digits in binary representation. *)
 
@@ -17,7 +17,7 @@ Function attempt_2 (n r : nat) {measure (fun x => x) n} : nat :=
   | _ => attempt_2 (Nat.div2 n) (r + 1)
   end.
 Proof.
-  intros. apply lt_div2. lia.
+  intros. apply Nat.lt_div2. lia.
 Defined.
 
 Compute attempt_2 1024 0.
@@ -29,7 +29,7 @@ Function attempt_3 (n r : nat) {wf lt n} : nat :=
   | _ => attempt_3 (Nat.div2 n) (r + 1)
   end.
 Proof.
-  + intros. apply lt_div2. lia.
+  + intros. apply Nat.lt_div2. lia.
   + apply Wf_nat.lt_wf.
 Defined.
 
@@ -90,7 +90,7 @@ Lemma div2_smaller : forall n n',
 Proof.
   destruct n; intros.
   discriminate.
-  apply lt_div2; lia.
+  apply Nat.lt_div2; lia.
 Qed.
 
 Definition numdigits (n: nat) : nat.
