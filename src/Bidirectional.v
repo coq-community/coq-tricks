@@ -1,8 +1,8 @@
-Require Vector.
-Import Vector.VectorNotations.
+Require Import List.
+Import ListNotations.
 
-Record vtype := { sz: nat; ty: Vector.t Type (S sz) }.
-Definition ft (vt: vtype) := Vector.hd vt.(ty) -> Vector.hd vt.(ty).
+Record vtype := { sz: nat; ty: {l: list Type | length l = sz}  }.
+Definition ft (vt: vtype) := hd Type (proj1_sig vt.(ty)) -> hd Type (proj1_sig vt.(ty)).
 Record func (t: vtype): Type :=
   mkFunc { f: ft t }.
 
@@ -10,5 +10,5 @@ Record func (t: vtype): Type :=
 environment without typing any of its supplied arguments. *)
 Arguments mkFunc &.
 
-Definition f1: func {| ty:= [nat:Type] |} :=
+Definition f1: func {| ty:= (exist _ [nat:Type] eq_refl) |} :=
   {| f := fun n => n + 1 |}.
