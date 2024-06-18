@@ -117,7 +117,7 @@ If you have a trick you've found useful feel free to submit an issue or pull req
 - `Search` vernacular variants; see [Search.v](src/Search.v) for examples.
 - `Search s -Learnt` for a search of local hypotheses excluding Learnt
 - `Locate` can search for notation, including partial searches.
-- `Optimize Heap` (undocumented) runs GC (specifically [`Gc.compact`](https://caml.inria.fr/pub/docs/manual-ocaml/libref/Gc.html))
+- `Optimize Heap` (undocumented) runs GC (specifically [`Gc.compact`](https://ocaml.org/manual/5.2/api/Gc.html#VALcompact))
 - `Optimize Proof` (undocumented) runs several simplifications on the current proof term (see [`Proofview.compact`](https://github.com/coq/coq/blob/9a4ca53a3a021cb16de7706ec79a26e49f54de49/engine/proofview.ml#L40))
 - (in Coq 8.12 and earlier) `Generalizable Variable A` enables implicit generalization; `` Definition id `(x:A) := x `` will implicitly add a parameter `A` before `x`. `Generalizable All Variables` enables implicit generalization for any identifier. Note that this surprisingly allows generalization without a backtick in Instances. [Issue #6030](https://github.com/coq/coq/issues/6030) generously requests this behavior be documented, but it should probably require enabling some option. This has been fixed in Coq 8.13; the old behavior requires `Set Instance Generalized Output`. In Coq 8.14 the option has been removed.
 - `Check` supports partial terms, printing a type along with a context of evars. A cool example is `Check (id _ _)`, where the first underscore must be a function (along with other constraints on the types involved).
