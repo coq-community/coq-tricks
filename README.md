@@ -48,6 +48,7 @@ If you have a trick you've found useful feel free to submit an issue or pull req
   - `in |- *` (just the goal, same as leaving the whole thing off)
   - `in * |- *` (everywhere, same as `in *`)
     These forms would be especially useful if occurrence clauses were first-class objects; that is, if tactics could take and pass occurrence clauses. Currently user-defined tactics support occurrence clauses via a set of tactic notations.
+- Defining tactics (`Tactic Notation`s) that accept multiple optional parameters directly is cumbersome, but it can be done more flexibly using Ltac2. An example can be found in [TacticNotationOptionalParams.v](src/TacticNotationOptionalParams.v).
 - You can use notations to shorten repetitive Ltac patterns (much like Haskell's [PatternSynonyms](https://ghc.haskell.org/trac/ghc/wiki/PatternSynonyms#Motivatingexample)). Define a notation with holes (underscores) and use it in an Ltac match, eg `Notation anyplus := (_ + _).` and then
   ```
   match goal with
