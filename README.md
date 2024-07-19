@@ -1,6 +1,6 @@
 # Tricks in Coq
 
-[![CI](https://github.com/tchajed/coq-tricks/workflows/CI/badge.svg)](https://github.com/tchajed/coq-tricks/actions?query=workflow%3ACI)
+[![CI](https://github.com/tchajed/coq-tricks/workflows/CI/badge.svg)](https://github.cm/tchajed/coq-tricks/actions?query=workflow%3ACI)
 
 Some tips, tricks, and features in Coq that are hard to discover.
 
@@ -109,7 +109,9 @@ If you have a trick you've found useful feel free to submit an issue or pull req
   - the notations can be brought into scope everywhere as needed with `Import` and `Local Open Scope`, restoring the convenience of a global notation
   - if notations conflict, some of them can always be scoped appropriately
 
-- Coq has a module system, modeled after ML (eg, the one used in OCaml). You can see some simple examples of using it in [Modules.v](src/Modules.v). In user code, I've found modules to be more trouble than their worth 90% of the time - the biggest issue is that once something is in a module type, the only way to extend it is with a new module that wraps an existing module, and the only way to use the extension is to instantiate it. At the same time, you can mostly simulate module types with records.
+- Coq has a module system, modeled after ML (eg, the one used in OCaml). You can
+  see some simple examples of using it in [Modules.v](src/Modules.v). In user
+  code, I've found module types and module functors to be more trouble than they're worth 90% of the time - the biggest issue is that once something is in a module type, the only way to extend it is with a new module that wraps an existing module, and the only way to use the extension is to instantiate it. At the same time, you can mostly simulate module types with records.
 - Coq type class resolution is extremely flexible. There's a hint database called `typeclass_instances` and typeclass resolution is essentially `eauto with typeclass_instances`. Normally you add to this database with commands like `Instance`, but you can add whatever you want to it, including `Hint Extern`s. See [coq-record-update](https://github.com/tchajed/coq-record-update) for a practical example.
 - Classes are a bit special compared to any other type. First of all, in `(_ : T x1 x2)` Coq will only trigger type class resolution to fill the hole when `T` is a class. Second, classes get special implicit generalization behavior; specifically, you can write `{T}` and Coq will automatically generalize the _arguments to T_, which you don't even have to write down. See [the manual on implicit generalization](https://coq.github.io/doc/master/refman/language/gallina-extensions.html#implicit-generalization) for more details. Note that you don't have to use `Class` at declaration time to make something a class; you can do it after the fact with `Existing Class T`.
 - `Set Printing Projections` is nice in theory if you use records, but it
@@ -139,14 +141,20 @@ If you have a trick you've found useful feel free to submit an issue or pull req
 - To declare an axiomatic instance of a typeclass, use `Declare Instance foo : TypeClass`. This better than the pattern of `Axiom` + `Existing Instance`.
 - To make Ltac scripts more readable, you can use `Set Default Goal Selector "!".`, which will enforce that every Ltac command (sentence) be applied to exactly one focused goal. You achieve that by using a combination of bullets and braces. As a result, when reading a script you can always see the flow of where multiple goals are generated and solved.
 - `Arguments foo _ & _` (in Coq 8.11) adds a _bidirectionality hint_ saying that an application of `foo` should infer a type from its arguments after typing the first argument. See [Bidirectional.v](src/Bidirectional.v) for an example and the [latest Coq documentation](https://coq.github.io/doc/master/refman/language/gallina-extensions.html?highlight=bidirectional#coq:cmd.arguments-bidirectionality-hints).
-- Coq 8.11 introduced compiled interfaces, aka `vos` files (as far as I can tell there are a more principled replacement for `vio` files). Suppose you make a change deep down to `Lib.v` and want to start working on `Proof.v` which imports `Lib.v` through many dependencies. With `vos` files, you can recompile all the _signatures_ that `Proof.v` depends on, skippinng proofs, and keep working. The basic way to use them is to compile `Proof.required_vos`, a special dependency `coqdep` generates that will build everything needed to work on `Proof.v`. Coq natively looks for `vos` files in interactive mode, and uses empty `vos` files to indicate that the file is fully compiled in a `vo` file.
+- Coq 8.11 introduced compiled interfaces, aka `vos` files (as far as I can tell they are a more principled replacement for `vio` files). Suppose you make a change deep down to `Lib.v` and want to start working on `Proof.v` which imports `Lib.v` through many dependencies. With `vos` files, you can recompile all the _signatures_ that `Proof.v` depends on, skippinng proofs, and keep working. The basic way to use them is to compile `Proof.required_vos`, a special dependency `coqdep` generates that will build everything needed to work on `Proof.v`. Coq natively looks for `vos` files in interactive mode, and uses empty `vos` files to indicate that the file is fully compiled in a `vo` file.
 
   Note that Coq also has `vok` files; it's possible to check the missing proofs in a `vos` file, but this does not produce a `vo` and so all Coq can do is record that the proofs have been checked. They can also be compiled in parallel within a single file, although I don't know how to do that. Compiling `vok`s lets you fairly confidently check proofs, but to really check everything (particularly universe constraints) you need to build `vo` files from scratch.
 
-  Signature files have one big caveat: if Coq cannot determine the type of a theorem or the proof ends with `Defined` (and thus might be relevant to later type-checking), it has to run the proof. It does so _silently_, potentially eliminating any performance benefit. The main reason this happens is due to proofs in a section that don't annotate which section variables are used with `Proof using`. Generally this can be fixed with `Set Default Proof Using "Type"`, though only on Coq master and not on Coq 8.11.0.
+  Signature files have one big caveat: if Coq cannot determine the type of a
+  theorem or the proof ends with `Defined` (and thus might be relevant to later
+  type-checking), it has to run the proof. It does so _silently_, potentially
+  eliminating any performance benefit. The main reason this happens is due to
+  proofs in a section that don't annotate which section variables are used with
+  `Proof using`. Generally this can be fixed with `Set Default Proof Using
+  "Type"`, though only on Coq 8.12+.
 
-- Coq 8.12+alpha has a new feature `Set Printing Parentheses` that prints parentheses as if no notations had an associativity. For example, this will print `(1,2,3)` as `((1,2),3)`. This is much more readable than entirely disabling notations.
-- You can use `Export Set` to set options in a way that affects any file directly importing the file (but not transitively importing, the way `Global Set` works). This allows a project to locally set up defaults with an `options.v` file with all of its options, which every file imports. You can use this for basic sanity settings, like `Set Default Proof Using "Type".` and `Set Default Goal Selector "!"` without forcing them on all projects that import your project.
+- Coq 8.12 has a new feature `Set Printing Parentheses` that prints parentheses as if no notations had an associativity. For example, this will print `(1,2,3)` as `((1,2),3)`. This is much more readable than entirely disabling notations.
+- You can use `Export Set` or `#[export] Set` to set options in a way that affects any file directly importing the file (but not transitively importing, the way `Global Set` works). This allows a project to locally set up defaults with an `options.v` file with all of its options, which every file imports. You can use this for basic sanity settings, like `Set Default Proof Using "Type".` and `Set Default Goal Selector "!"` without forcing them on all projects that import your project.
 - You can use `all: fail "goals remaining".` to assert that a proof is complete. This is useful when you'll use `Admitted.` but want to document (and check in CI) that the proof is complete other than the `admit.` tactics used.
 - You can also use `Fail idtac.` to assert that a proof is complete, which is shorter than the above but more arcane.
 - You can use `Fail Fail Qed.` to really assert that a proof is complete, including doing universe checks, but then still be able to `Restart` it. I think this is only useful for illustrating small examples but it's amusing that it works. (The new `Succeed` vernacular in Coq 8.15 is a better replacement, because it preserves error messages on failure.)
@@ -169,6 +177,6 @@ If you have a trick you've found useful feel free to submit an issue or pull req
 ## Using Coq
 
 - You can pass `-noinit` to `coqc` or `coqtop` to avoid loading the standard library.
-- Ltac is provided as a plugin loaded by the standard library; to load it you need `Declare ML Module "ltac_plugin".` (see [NoInit.v](src/NoInit.v)).
+- Ltac is provided as a plugin loaded by the standard library; if you have `-noinit` to load it you need `Declare ML Module "ltac_plugin".` (see [NoInit.v](src/NoInit.v)).
 - Numeral notations are only provided by the prelude, even if you issue `Require Import Coq.Init.Datatypes`.
 - If you use Coq master, the latest Coq reference manual is built and deployed to <https://coq.github.io/doc/master/refman/index.html> automatically.
