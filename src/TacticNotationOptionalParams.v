@@ -18,6 +18,8 @@ In short, the idea is as follows:
 - The outer Tactic Notation will run each of the provided parameter-tactics and
   catch their exceptions, using them appropriately.*)
 
+Set Warnings "-undo-batch-mode".
+
 From Coq Require Import SetoidTactics.
 From Ltac2 Require Import Ltac2 Printf.
 (** Next command resets the default tactic language to Ltac.*)
