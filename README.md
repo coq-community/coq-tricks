@@ -151,6 +151,20 @@ If you have a trick you've found useful feel free to submit an issue or pull req
 - You can also use `Fail idtac.` to assert that a proof is complete, which is shorter than the above but more arcane.
 - You can use `Fail Fail Qed.` to really assert that a proof is complete, including doing universe checks, but then still be able to `Restart` it. I think this is only useful for illustrating small examples but it's amusing that it works. (The new `Succeed` vernacular in Coq 8.15 is a better replacement, because it preserves error messages on failure.)
 - Hints can now be set to global, export, or local. Global (the current default) means the hint applies to any module that transitivity imports this one; export makes the hint visible only if the caller imports this module directly. The behavior will eventually change for hints at the top-level so that they become export instead of global (see https://github.com/coq/coq/pull/13384), so this might be worth understanding now. [HintLocality.v](src/HintLocality.v) walks through what the three levels do.
+- The [uniform inheritance condition for coercions is
+  gone](https://github.com/coq/coq/pull/15789) as of March 2022. This condition
+  required that all the implicit arguments of the target of a coercion could be
+  inferred from the source, so if the source had extra implicit arguments the
+  definition could not be a coercion. This is no longer the case - elaboration
+  will infer the missing arguments. There's still a warning but you can disable
+  it with `#[warning="-uniform-inheritance"]` on the coercion.
+
+## Warnings and options
+
+- You can use `Set Warnings "-deprecated-syntactic-definition"` to achieve the
+  same effect as `-w -deprecated-syntactic-definition` from the command line,
+  but from within a Coq file. At least as of Coq 8.19 you can also use
+  `#[warning=-"-deprecated-syntactic-definition]` to disable the warning for one command.
 
 ## Using Coq
 
