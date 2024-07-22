@@ -5,7 +5,7 @@ name: CI
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
   schedule:
     # Tuesday 8am UTC (3am EST)
@@ -19,17 +19,13 @@ jobs:
         coq_version:
           - dev
       max-parallel: 4
-      # don't cancel all in-progress jobs if one matrix job fails:
       fail-fast: false
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
       - uses: coq-community/docker-coq-action@v1
         with:
           coq_version: ${{ matrix.coq_version }}
-          ocaml_version: "4.14-flambda"
           install: ""
           after_install: ""
           before_script: |
