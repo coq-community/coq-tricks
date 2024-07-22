@@ -8,7 +8,7 @@ If you have a trick you've found useful feel free to submit an issue or pull req
 
 The code in the repository is licensed under the terms of the MIT license. The
 documentation (including this README) is licensed under the [CC0
-license](https://creativecommons.org/public-domain/cc0).
+license](https://creativecommons.org/publicdomain/zero/1.0/).
 
 ## Ltac
 
