@@ -6,6 +6,10 @@ Some tips, tricks, and features in Coq that are hard to discover.
 
 If you have a trick you've found useful feel free to submit an issue or pull request!
 
+The code in the repository is licensed under the terms of the MIT license. The
+documentation (including this README) is licensed under the [CC0
+license](https://creativecommons.org/public-domain/cc0).
+
 ## Ltac
 
 - The `pattern` tactic generalizes an expression over a variable. For example, `pattern y` transforms a goal of `P x y z` into `(fun y => P x y z) y`. An especially useful way to use this is to pattern match on `eval pattern y in constr:(P x y z)` to extract just the function.
