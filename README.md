@@ -206,3 +206,14 @@ To build all the examples in `src/`, run `make`.
 - Ltac is provided as a plugin loaded by the standard library; if you have `-noinit` to load it you need `Declare ML Module "ltac_plugin".` (see [NoInit.v](src/NoInit.v)).
 - Numeral notations are only provided by the prelude, even if you issue `Require Import Coq.Init.Datatypes`.
 - If you use Coq master, the latest Coq reference manual is built and deployed to <https://coq.github.io/doc/master/refman/index.html> automatically.
+- At Qed, Coq re-checks the proof term, which can take a while. At the same
+  time, Qed rarely fails - some reasons why it might include that there's a
+  universe inconsistency, the coinductive guarded check fails, there's a bug in
+  an OCaml tactic, or there's an incorrect use of `exact_no_check`. It's not so
+  easy to disable Qed - in Perennial we do so using this
+  [disable-qed.sh](https://github.com/mit-pdos/perennial/blob/e15783af0abb0614b50c4166b9bab49f5817032c/etc/disable-qed.sh)
+  script, which replaces `Qed` with `Unshelve. Fail idtac. Admitted.`. This
+  still ensures there are no goals, but skips the Qed checking. We only skip Qed
+  during CI, but run it regularly locally to have a fully consistent build;
+  another good tradeoff would be to run with Qed checking on a weekly basis but
+  not on every commit.
