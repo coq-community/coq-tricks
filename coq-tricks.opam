@@ -1,0 +1,29 @@
+opam-version: "2.0"
+maintainer: "palmskog@gmail.com"
+version: "dev"
+
+homepage: "https://github.com/coq-community/coq-tricks"
+dev-repo: "git+https://github.com/coq-community/coq-tricks.git"
+bug-reports: "https://github.com/coq-community/coq-tricks/issues"
+license: "MIT"
+
+synopsis: "Tips, tricks, and features in Coq that are hard to discover"
+description: """
+Some tips, tricks, and features in Coq that are hard to discover.
+
+If you have a trick you've found useful feel free to submit an issue or pull request!"""
+
+build: [make "-j%{jobs}%"]
+depends: [
+  "coq" {= "dev"}
+]
+
+tags: [
+  "category:Miscellaneous/Coq Use Examples"
+  "keyword:tricks"
+  "keyword:tips"
+  "logpath:Tricks"
+]
+authors: [
+  "Tej Chajed"
+]

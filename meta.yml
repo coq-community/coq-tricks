@@ -1,0 +1,61 @@
+---
+fullname: Tricks in Coq
+shortname: coq-tricks
+organization: coq-community
+community: true
+action: true
+opam_name: coq-tricks
+branch: main
+
+synopsis: >-
+  Tips, tricks, and features in Coq that are hard to discover
+
+description: |-
+  Some tips, tricks, and features in Coq that are hard to discover.
+
+  If you have a trick you've found useful feel free to submit an issue or pull request!
+
+authors:
+- name: Tej Chajed
+  initial: true
+
+maintainers:
+- name: Tej Chajed
+  nickname: tchajed
+
+opam-file-maintainer: palmskog@gmail.com
+
+opam-file-version: dev
+
+license:
+  fullname: The code in the repository is licensed under the terms of the MIT license. The documentation (including this README) is licensed under the CC0 license.
+  identifier: MIT
+
+supported_coq_versions:
+  text: Coq master
+  opam: '{= "dev"}'
+
+tested_coq_opam_versions:
+- version: 'dev'
+
+# Tuesday 8am UTC (3am EST)
+ci_cron_schedule: '0 8 * * TUE'
+
+namespace: Tricks
+
+build: |-
+ ## Building instructions
+
+ ``` shell
+ git clone https://github.com/coq-community/coq-tricks
+ cd coq-tricks
+ make   # or make -j <number-of-cores-on-your-machine>
+ ```
+
+keywords:
+- name: tricks
+- name: tips
+
+categories:
+- name: Miscellaneous/Coq Use Examples
+---
