@@ -7,7 +7,7 @@ COQ_ARGS :=
 all: $(VO_FILES)
 
 src/%.vo: src/%.v
-	coqc -q -Q . Tricks $(COQ_ARGS) $< -o $@
+	coqc -q -Q src Tricks $(COQ_ARGS) $< -o $@
 
 # these rules set COQ_ARGS where needed
 src/NoInit.vo: COQ_ARGS = -noinit
