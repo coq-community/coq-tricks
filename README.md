@@ -1,14 +1,43 @@
 # Tricks in Coq
 
-[![CI](https://github.com/tchajed/coq-tricks/workflows/CI/badge.svg)](https://github.cm/tchajed/coq-tricks/actions?query=workflow%3ACI)
+[![Docker CI][docker-action-shield]][docker-action-link]
+[![Contributing][contributing-shield]][contributing-link]
+[![Code of Conduct][conduct-shield]][conduct-link]
+[![Zulip][zulip-shield]][zulip-link]
+
+[docker-action-shield]: https://github.com/coq-community/coq-tricks/actions/workflows/docker-action.yml/badge.svg?branch=main
+[docker-action-link]: https://github.com/coq-community/coq-tricks/actions/workflows/docker-action.yml
+
+[contributing-shield]: https://img.shields.io/badge/contributions-welcome-%23f7931e.svg
+[contributing-link]: https://github.com/coq-community/manifesto/blob/master/CONTRIBUTING.md
+
+[conduct-shield]: https://img.shields.io/badge/%E2%9D%A4-code%20of%20conduct-%23f15a24.svg
+[conduct-link]: https://github.com/coq-community/manifesto/blob/master/CODE_OF_CONDUCT.md
+
+[zulip-shield]: https://img.shields.io/badge/chat-on%20zulip-%23c1272d.svg
+[zulip-link]: https://coq.zulipchat.com/#narrow/stream/237663-coq-community-devs.20.26.20users
 
 Some tips, tricks, and features in Coq that are hard to discover.
 
 If you have a trick you've found useful feel free to submit an issue or pull request!
 
-The code in the repository is licensed under the terms of the MIT license. The
-documentation (including this README) is licensed under the [CC0
-license](https://creativecommons.org/publicdomain/zero/1.0/).
+## Meta
+
+- Author(s):
+  - Tej Chajed (initial)
+- Coq-community maintainer(s):
+  - Tej Chajed ([**@tchajed**](https://github.com/tchajed))
+- License: The code in the repository is licensed under the terms of the [MIT license](LICENSE). The documentation (including this README) is licensed under the [CC0 license](LICENSE-docs).
+- Compatible Coq versions: Coq master
+- Coq namespace: `Tricks`
+
+## Building instructions
+
+``` shell
+git clone https://github.com/coq-community/coq-tricks
+cd coq-tricks
+make   # or make -j <number-of-cores-on-your-machine>
+```
 
 ## Ltac
 
@@ -16,7 +45,7 @@ license](https://creativecommons.org/publicdomain/zero/1.0/).
 - `lazymatch` is like `match` but without backtracking on failures inside the match action. If you're not using failures for backtracking (this is often the case), then `lazymatch` gets better error messages because an error inside the action becomes the overall error message rather than the uninformative "no match" error message. (The semantics of `match` mean Coq can't do obviously do better - it can't distinguish between a bug in the action and intentionally using the failure to prevent pattern matching.)
 - `deex` (see [Deex.v](src/Deex.v)) is a useful tactic for extracting the witness from an `exists` hypothesis while preserving the name of the witness and hypothesis.
 - `Ltac t ::= foo.` re-defines the tactic `t` to `foo`. This changes the _binding_, so tactics that refer to `t` will use the new definition. You can use this for a form of extensibility: write `Ltac hook := fail` and then use
-  ```
+  ```coq
   repeat match goal with
          | (* initial cases *)
          | _ => hook
@@ -54,7 +83,7 @@ license](https://creativecommons.org/publicdomain/zero/1.0/).
     These forms would be especially useful if occurrence clauses were first-class objects; that is, if tactics could take and pass occurrence clauses. Currently user-defined tactics support occurrence clauses via a set of tactic notations.
 - Defining tactics (`Tactic Notation`s) that accept multiple optional parameters directly is cumbersome, but it can be done more flexibly using Ltac2. An example can be found in [TacticNotationOptionalParams.v](src/TacticNotationOptionalParams.v).
 - You can use notations to shorten repetitive Ltac patterns (much like Haskell's [PatternSynonyms](https://ghc.haskell.org/trac/ghc/wiki/PatternSynonyms#Motivatingexample)). Define a notation with holes (underscores) and use it in an Ltac match, eg `Notation anyplus := (_ + _).` and then
-  ```
+  ```coq
   match goal with
   | |- context[anyplus] => idtac
   end
