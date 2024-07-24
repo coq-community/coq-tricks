@@ -29,15 +29,8 @@ If you have a trick you've found useful feel free to submit an issue or pull req
   - Tej Chajed ([**@tchajed**](https://github.com/tchajed))
 - License: The code in the repository is licensed under the terms of the [MIT license](LICENSE). The documentation (including this README) is licensed under the [CC0 license](LICENSE-docs).
 - Compatible Coq versions: Coq master
-- Coq namespace: `Tricks`
 
-## Building instructions
-
-``` shell
-git clone https://github.com/coq-community/coq-tricks
-cd coq-tricks
-make   # or make -j <number-of-cores-on-your-machine>
-```
+To build all the examples in `src/`, run `make`.
 
 ## Ltac
 
