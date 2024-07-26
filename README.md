@@ -106,12 +106,13 @@ To build all the examples in `src/`, run `make`.
 - maximally inserted implicit arguments are implicit even when for identifier alone (eg, `nil` is defined to include the implicit list element type)
 - maximally inserted arguments can be defined differently for different numbers of arguments - undocumented but [`eq_refl` provides an example](https://github.com/coq/coq/blob/trunk/theories/Init/Logic.v#L297-298)
 - `r.(Field)` syntax: same as `Field r`, but convenient when `Field` is a projection function for the (record) type of `r`. If you use these, you might also want `Set Printing Projections` so Coq re-prints calls to projections with the same syntax.
-- `Function` vernacular provides a more advanced way to define recursive functions, which removes the restriction of having a structurally decreasing argument; you just need to specify a well-founded relation or a decreasing measure maps to a nat, then prove all necessary obligations to show this function can terminate. See [manual](https://coq.inria.fr/doc/V8.19.0/refman/using/libraries/funind.html#coq:cmd.Function) and examples in `Function.v` for more details.
+- `Function` vernacular provides a more advanced way to define recursive functions, which removes the restriction of having a structurally decreasing argument; you just need to specify a well-founded relation or a decreasing measure maps to a nat, then prove all necessary obligations to show this function can terminate. See [manual](https://coq.inria.fr/doc/V8.19.0/refman/using/libraries/funind.html#coq:cmd.Function) and examples in [Function.v](src/Function.v) for more details.
 
-  Two alternatives are considerable as drop-in replacements for `Function`.
+  Three alternatives may be considered as drop-in replacements for `Function`.
 
   - `Program Fixpoint` may be useful when defining a nested recursive function. See [manual](https://coq.inria.fr/doc/V8.19.0/refman/addendum/program.html#program-fixpoint) and [this StackOverflow post](https://stackoverflow.com/questions/10292421/error-in-defining-ackermann-in-coq).
   - [CPDT's way](http://adam.chlipala.net/cpdt/html/Cpdt.GeneralRec.html) of defining general recursive functions with `Fix` combinator.
+  - [Equations](https://github.com/mattam82/Coq-Equations) is a plugin which extends Coq with new commands for defining recursive functions, and compiles everything down to eliminators for inductive types, equality and accessibility.
 
 - One can pattern-match on tuples under lambdas: `Definition fst {A B} : (A * B) -> A := fun '(x,_) => x.`
 - Records fields can be defined with `:>`, which make that field accessor a coercion. There are three ways to use this (since there are three types of coercion classes). See [Coercions.v](src/Coercions.v) for some concrete examples.
