@@ -198,8 +198,8 @@ To build all the examples in `src/`, run `make`.
 
 - You can use `Set Warnings "-deprecated-syntactic-definition"` to achieve the
   same effect as `-w -deprecated-syntactic-definition` from the command line,
-  but from within a Coq file. At least as of Coq 8.19 you can also use
-  `#[warning=-"-deprecated-syntactic-definition]` to disable the warning for one command.
+  but from within a Coq file. As of Coq 8.18 you can also use
+  `#[warning="-deprecated-syntactic-definition"]` to disable the warning for one command.
 
 ## Using Coq
 
